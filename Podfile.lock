@@ -1,0 +1,114 @@
+PODS:
+  - Alamofire (4.7.2)
+  - IMA (1.0)
+  - InnovidAdRenderer (1.2.8):
+    - Kingfisher (~> 3.13.0)
+    - Moya (~> 8.0.0)
+    - SWXMLHash (~> 4.2.3)
+  - JSONModel (1.3.0)
+  - Kingfisher (3.13.1)
+  - Moya (8.0.5):
+    - Moya/Core (= 8.0.5)
+  - Moya/Core (8.0.5):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - OptimizelySDKCore (1.1.9):
+    - OptimizelySDKCore/JSONModel (= 1.1.9)
+  - OptimizelySDKCore/JSONModel (1.1.9):
+    - JSONModel (= 1.3.0)
+  - OptimizelySDKDatafileManager (1.1.9):
+    - OptimizelySDKDatafileManager/JSONModel (= 1.1.9)
+    - OptimizelySDKShared (= 1.1.9)
+  - OptimizelySDKDatafileManager/JSONModel (1.1.9):
+    - JSONModel (= 1.3.0)
+    - OptimizelySDKShared (= 1.1.9)
+  - OptimizelySDKEventDispatcher (1.1.9):
+    - OptimizelySDKEventDispatcher/JSONModel (= 1.1.9)
+    - OptimizelySDKShared (= 1.1.9)
+  - OptimizelySDKEventDispatcher/JSONModel (1.1.9):
+    - JSONModel (= 1.3.0)
+    - OptimizelySDKShared (= 1.1.9)
+  - OptimizelySDKShared (1.1.9):
+    - FMDB (= 2.6.2)
+    - JSONModel (= 1.3.0)
+    - OptimizelySDKCore (= 1.1.9)
+  - OptimizelySDKTVOS (1.1.9):
+    - OptimizelySDKDatafileManager (= 1.1.9)
+    - OptimizelySDKEventDispatcher (= 1.1.9)
+    - OptimizelySDKTVOS/JSONModel (= 1.1.9)
+    - OptimizelySDKUserProfile (= 1.1.9)
+  - OptimizelySDKTVOS/JSONModel (1.1.9):
+    - JSONModel (= 1.3.0)
+    - OptimizelySDKDatafileManager (= 1.1.9)
+    - OptimizelySDKEventDispatcher (= 1.1.9)
+    - OptimizelySDKUserProfile (= 1.1.9)
+  - OptimizelySDKUserProfile (1.1.9):
+    - OptimizelySDKShared (= 1.1.9)
+    - OptimizelySDKUserProfile/JSONModel (= 1.1.9)
+  - OptimizelySDKUserProfile/JSONModel (1.1.9):
+    - JSONModel (= 1.3.0)
+    - OptimizelySDKShared (= 1.1.9)
+  - Result (3.2.4)
+  - SDWebImage (4.2.3):
+    - SDWebImage/Core (= 4.2.3)
+  - SDWebImage/Core (4.2.3)
+  - SWXMLHash (4.2.5)
+  - TruexAdRenderer (3.3.0-rc.2):
+    - InnovidAdRenderer (= 1.2.8)
+    - OptimizelySDKTVOS (= 1.1.9)
+    - SDWebImage (~> 4.2.3)
+    - YouiTVAdRenderer (~> 0.2.0)
+  - YouiTVAdRenderer (0.2.0)
+
+DEPENDENCIES:
+  - IMA (from `./IMA`)
+  - TruexAdRenderer (~> 3.3.0-rc.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - JSONModel
+    - Kingfisher
+    - Moya
+    - OptimizelySDKCore
+    - OptimizelySDKDatafileManager
+    - OptimizelySDKEventDispatcher
+    - OptimizelySDKShared
+    - OptimizelySDKTVOS
+    - OptimizelySDKUserProfile
+    - Result
+    - SDWebImage
+    - SWXMLHash
+  https://github.com/socialvibe/cocoapod-specs.git:
+    - TruexAdRenderer
+  https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git:
+    - YouiTVAdRenderer
+  "https://innovid-cocoapods:3bbe7445d58951a8f89c5e54c0ebfdd17039589e@github.com/Innovid/cocoapods-spec.git":
+    - InnovidAdRenderer
+
+EXTERNAL SOURCES:
+  IMA:
+    :path: "./IMA"
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  IMA: 8b21ed38de5ee9290b5513ac17d829e1527b599d
+  InnovidAdRenderer: aefedd4382f14fa251fd9bb5571fa2348868c0fe
+  JSONModel: 81c06ecf99190a25fa6aafceea5faffa7880868a
+  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
+  Moya: c37eec09a098ba9991b5a963b291fc5704bdb9ef
+  OptimizelySDKCore: 4a6c2edca90e04e639b0108ef21601e08c40cfa6
+  OptimizelySDKDatafileManager: b66020b42dcca954a4ec2551c7f6a73ca7035823
+  OptimizelySDKEventDispatcher: f0ebefa16a6a5834fed562ab427db5fd4ebc5a6f
+  OptimizelySDKShared: 2c981d2d88cc79296a314293f770fa5032f8bff8
+  OptimizelySDKTVOS: 804ac830a4171ffd2949394bdd276d318f4399f7
+  OptimizelySDKUserProfile: 20027486f6549934c479fd4b704c5c1195c8355b
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
+  SWXMLHash: eb16013c6f654853980822e0a778c9d66e017dde
+  TruexAdRenderer: 5821ad56895d8d2d8e42b7832ea34e4bda4a7e23
+  YouiTVAdRenderer: 314962f9e163b8eab8b03085e0f16381b85c7c9d
+
+PODFILE CHECKSUM: 5fa949d0fbba1ac08dcf8dbf988324739c0b996e
+
+COCOAPODS: 1.5.3

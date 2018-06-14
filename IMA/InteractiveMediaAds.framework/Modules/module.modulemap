@@ -1,0 +1,23 @@
+framework module InteractiveMediaAds {
+  umbrella header "InteractiveMediaAds.h"
+
+  export *
+  module * { export * }
+
+  link framework "AdSupport"
+  link framework "AVFoundation"
+  link framework "Foundation"
+  link framework "UIKit"
+
+  header "IMAAd.h"
+  header "IMAAdBreakInfo.h"
+  header "IMAAVPlayerVideoDisplay.h"
+  header "IMACompanion.h"
+  header "IMACuepoint.h"
+  header "IMALiveStreamRequest.h"
+  header "IMASettings.h"
+  header "IMAStreamManager.h"
+  header "IMAStreamRequest.h"
+  header "IMAVideoDisplay.h"
+  header "IMAVODStreamRequest.h"
+}
