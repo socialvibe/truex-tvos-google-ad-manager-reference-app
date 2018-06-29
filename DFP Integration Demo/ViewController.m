@@ -19,10 +19,10 @@
 @property IMAStreamManager *streamManager;
 
 // The renderer that drives the True[X] Engagement experience.
-@property TruexAdRenderer *tar;
+@property TruexAdRenderer *tar; // [2]
 
 // We keep track of which ad break we're in so we know how far to seek when skipping it.
-@property IMAAdBreakInfo *currentAdBreak;
+@property IMAAdBreakInfo *currentAdBreak; // [1]
 
 @end
 
@@ -54,19 +54,19 @@
 
 - (void)streamManager:(IMAStreamManager *)streamManager adBreakDidStart:(IMAAdBreakInfo *)adBreakInfo {
     // Keep track of this for later use. adBreakDidStart should fire before adDidStart in all cases.
-    self.currentAdBreak = adBreakInfo;
+    self.currentAdBreak = adBreakInfo; // [1]
 }
 
 - (void)streamManager:(IMAStreamManager *)streamManager adDidStart:(IMAAd *)ad {
     // The True[X] Engagement information is stored in a VAST companion ad, so we look through all
     // available companions to see if there's anything to work with.
     for (IMACompanion *companion in ad.companions) {
-        if ([companion.apiFramework isEqualToString:@"truex"]) {
+        if ([companion.apiFramework isEqualToString:@"truex"]) { // [2]
             // We pause the underlying stream in order to present the True[X] experience.
-            [self.playerViewController.player pause];
+            [self.playerViewController.player pause]; // [3]
             // The companion had contains a URL (the "static resource URL") which tells us where to go to get the
             // ad parameters for our Engagement.
-            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]]; // [4]
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:companion.staticResourceURL]];
             NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 // Once we have the parameters, we figure out what kind of ad break we're in, and then we fire up
@@ -79,7 +79,7 @@
                 else {
                     slotType = MIDROLL;
                 }
-                self.tar = [[TruexAdRenderer alloc] initWithUrl:@"https://media.truex.com/placeholder.js" adParameters:jsonDict slotType:slotType];
+                self.tar = [[TruexAdRenderer alloc] initWithUrl:@"https://media.truex.com/placeholder.js" adParameters:jsonDict slotType:slotType]; // [5]
                 self.tar.delegate = self;
             }];
             [task resume];
@@ -109,7 +109,7 @@
 // is getting to skip the ads, here we seek over the linear ad pod and into the content. Note that we don't re-enable
 // playback here; the viewer might stay in their engagements for quite a while after they've earned their credit. However,
 // by seeking now, we can have the playhead at the right place when the viewer is ready.
--(void) onAdFreePod {
+-(void) onAdFreePod { // [6]
     CMTime seekTime = CMTimeAdd(
             self.playerViewController.player.currentTime,
             CMTimeMakeWithSeconds(self.currentAdBreak.duration, 1000)
@@ -121,15 +121,15 @@
 // cases, we can just resume playback of the player. If the viewer has earned their true[ATTENTION] credit, then they will
 // already be seeked past the ad pod, so they will se content. If not, then the playhead will still be at the beginning
 // of the ad pod, so on resume, the viewer will see the ads.
--(void) onAdCompleted:(NSInteger)timeSpent {
+-(void) onAdCompleted:(NSInteger)timeSpent { // [7]
     [self.playerViewController.player play];
 }
 
--(void) onAdError:(NSString *)errorMessage {
+-(void) onAdError:(NSString *)errorMessage { // [7]
     [self.playerViewController.player play];
 }
 
--(void) onNoAdsAvailable {
+-(void) onNoAdsAvailable { // [7]
     [self.playerViewController.player play];
 }
 
@@ -137,14 +137,14 @@
 // engagement choice card. In that case, we assume the user wants to cancel the whole stream, not just the true[X]
 // experience, so we dismiss the view controller, exiting the app. Of course, in a real media app, this would instead
 // go back to the episode list view, or whatever is appropriate.
--(void) onUserCancelStream {
+-(void) onUserCancelStream { // [8]
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // Finally, this method is invoked after the renderer has finished initialization, and since we always initialize the
 // renderer right before we want to play, we just immediately begin playback.
 -(void) onFetchAdComplete {
-    [self.tar start:self.playerViewController];
+    [self.tar start:self.playerViewController]; // [5]
 }
 
 @end
