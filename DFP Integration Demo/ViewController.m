@@ -2,7 +2,6 @@
 //  ViewController.m
 //  DFP Integration Demo
 //
-//  Created by Avi Finkel on 6/13/18.
 //  Copyright © 2018 True[X]. All rights reserved.
 //
 
@@ -14,18 +13,20 @@
 
 @interface ViewController () <IMAStreamManagerDelegate, TruexAdRendererDelegate>
 
+// These three properties allow us to do the basic work of playing back ad-stitched video.
 @property AVPlayerViewController *playerViewController;
 @property IMAAVPlayerVideoDisplay *videoDisplay;
 @property IMAStreamManager *streamManager;
 
+// The renderer that drives the True[X] Engagement experience.
 @property TruexAdRenderer *tar;
 
+// We keep track of which ad break we're in so we know how far to seek when skipping it.
 @property IMAAdBreakInfo *currentAdBreak;
 
 @end
 
 @implementation ViewController
-
 
 //MARK: - View Controller Methods
 
@@ -52,17 +53,24 @@
 //MARK: - IMA Stream Manager Delegate Methods
 
 - (void)streamManager:(IMAStreamManager *)streamManager adBreakDidStart:(IMAAdBreakInfo *)adBreakInfo {
+    // Keep track of this for later use. adBreakDidStart should fire before adDidStart in all cases.
     self.currentAdBreak = adBreakInfo;
 }
 
 - (void)streamManager:(IMAStreamManager *)streamManager adDidStart:(IMAAd *)ad {
+    // The True[X] Engagement information is stored in a VAST companion ad, so we look through all
+    // available companions to see if there's anything to work with.
     for (IMACompanion *companion in ad.companions) {
         if ([companion.apiFramework isEqualToString:@"truex"]) {
+            // We pause the underlying stream in order to present the True[X] experience.
             [self.playerViewController.player pause];
-            // Do that True[X] thing
+            // The companion had contains a URL (the "static resource URL") which tells us where to go to get the
+            // ad parameters for our Engagement.
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:companion.staticResourceURL]];
             NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                // Once we have the parameters, we figure out what kind of ad break we're in, and then we fire up
+                // the renderer.
                 NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                 NSString *slotType;
                 if (self.currentAdBreak.adBreakIndex == 0) {
@@ -80,6 +88,8 @@
     }
 }
 
+// These next two methods are required in the IMAStreamManagerDelegate protocol, but there's nothing we need to do in
+// them for the purposes of this integration demo, so we leave the bodies empty.
 - (void)streamManager:(IMAStreamManager *)streamManager didReceiveError:(NSError *)error {
     NSLog(@"Error: %@", error);
 }
@@ -90,9 +100,27 @@
 
 // MARK: - True[X] Ad Renderer Delegate Methods
 
+// A real application would probably have something to do here, but there's nothing we're strictly required to
+// do here in the simplest case.
 -(void) onAdStarted:(NSString*)campaignName {
 }
 
+// This method is invoked when the viewer has earned their true[ATTENTION] credit. Since in this example their reward
+// is getting to skip the ads, here we seek over the linear ad pod and into the content. Note that we don't re-enable
+// playback here; the viewer might stay in their engagements for quite a while after they've earned their credit. However,
+// by seeking now, we can have the playhead at the right place when the viewer is ready.
+-(void) onAdFreePod {
+    CMTime seekTime = CMTimeAdd(
+            self.playerViewController.player.currentTime,
+            CMTimeMakeWithSeconds(self.currentAdBreak.duration, 1000)
+    );
+    [self.playerViewController.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+}
+
+// The next three methods are all invoked when the engagement has, for whatever reason, stopped running. In all of these
+// cases, we can just resume playback of the player. If the viewer has earned their true[ATTENTION] credit, then they will
+// already be seeked past the ad pod, so they will se content. If not, then the playhead will still be at the beginning
+// of the ad pod, so on resume, the viewer will see the ads.
 -(void) onAdCompleted:(NSInteger)timeSpent {
     [self.playerViewController.player play];
 }
@@ -105,22 +133,18 @@
     [self.playerViewController.player play];
 }
 
--(void) onAdFreePod {
-    CMTime seekTime = CMTimeAdd(
-        self.playerViewController.player.currentTime,
-        CMTimeMakeWithSeconds(self.currentAdBreak.duration, 1000)
-    );
-    [self.playerViewController.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-}
-
+// This is invoked when the user presses the menu button on the TV remote while the renderer is still showing the
+// engagement choice card. In that case, we assume the user wants to cancel the whole stream, not just the true[X]
+// experience, so we dismiss the view controller, exiting the app. Of course, in a real media app, this would instead
+// go back to the episode list view, or whatever is appropriate.
 -(void) onUserCancelStream {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+// Finally, this method is invoked after the renderer has finished initialization, and since we always initialize the
+// renderer right before we want to play, we just immediately begin playback.
 -(void) onFetchAdComplete {
-    if (self.tar) {
-        [self.tar start:self.playerViewController];
-    }
+    [self.tar start:self.playerViewController];
 }
 
 @end
