@@ -37,10 +37,14 @@ In the IMA delegate method `adDidStart`, we inspect the `IMAAd`'s `companion` pr
 any companion has an `apiFramework` value matching `truex`, then we ignore all other
 companions and begin the True[X] engagement experience.
 
-## [3] - Pause video playback before entering an engagement
+## [3] - Prepare to enter the engagement
 
 By default, the underlying ads, which IMA has stitched into the stream, will keep playing,
-so the first we have to do is pause playback.
+so the first we have to do is pause playback. There will also be a "placeholder" ad at the
+first position of the ad break (this is the ad that contained the True[X] information that
+allowed us to enter the engagement in the first place), so we need to seek over that ad
+in any case. We will seek over the rest of the ad pod later, if the viewer earns that
+experience.
 
 ## [4] - Fetch ad parameters
 

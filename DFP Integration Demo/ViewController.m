@@ -62,8 +62,14 @@
     // available companions to see if there's anything to work with.
     for (IMACompanion *companion in ad.companions) {
         if ([companion.apiFramework isEqualToString:@"truex"]) { // [2]
-            // We pause the underlying stream in order to present the True[X] experience.
+            // We pause the underlying stream in order to present the True[X] experience and seek over the current ad,
+            // which is just a placeholder for the True[X] ad.
             [self.playerViewController.player pause]; // [3]
+            CMTime seekTime = CMTimeAdd(
+                    self.playerViewController.player.currentTime,
+                    CMTimeMakeWithSeconds(ad.duration, 1000)
+            );
+            [self.playerViewController.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
             // The companion had contains a URL (the "static resource URL") which tells us where to go to get the
             // ad parameters for our Engagement.
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]]; // [4]
@@ -108,12 +114,9 @@
 // This method is invoked when the viewer has earned their true[ATTENTION] credit. Since in this example their reward
 // is getting to skip the ads, here we seek over the linear ad pod and into the content. Note that we don't re-enable
 // playback here; the viewer might stay in their engagements for quite a while after they've earned their credit. However,
-// by seeking now, we can have the playhead at the right place when the viewer is ready.
+// by seeking now, we can have the play head at the right place when the viewer is ready.
 -(void) onAdFreePod { // [6]
-    CMTime seekTime = CMTimeAdd(
-            self.playerViewController.player.currentTime,
-            CMTimeMakeWithSeconds(self.currentAdBreak.duration, 1000)
-    );
+    CMTime seekTime = CMTimeMakeWithSeconds(self.currentAdBreak.timeOffset + self.currentAdBreak.duration, 1000);
     [self.playerViewController.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 
