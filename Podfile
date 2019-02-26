@@ -7,15 +7,27 @@ source 'https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git'
 
 target 'DFP Integration Demo' do
     use_frameworks!
-
-    pod 'TruexAdRenderer', '~> 3.3.0-rc.2'
+    pod 'TruexAdRenderer', '~> 3.6'
     pod 'IMA', :path => './IMA'
 end
 
 post_install do |installer|
+    print "Setting the default SWIFT_VERSION to 3.3\n"
+    installer.pods_project.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '3.3'
+    end
+
     installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.3'
+        if ['DFP Integration Demo'].include? "#{target}"
+            print "Setting #{target}'s SWIFT_VERSION to 3.3\n"
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '3.3'
+            end
+        else
+            print "Setting #{target}'s SWIFT_VERSION to Undefined (Xcode will automatically resolve)\n"
+            target.build_configurations.each do |config|
+                config.build_settings.delete('SWIFT_VERSION')
+            end
         end
     end
 end

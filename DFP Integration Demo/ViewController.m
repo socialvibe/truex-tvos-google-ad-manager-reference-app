@@ -2,7 +2,7 @@
 //  ViewController.m
 //  DFP Integration Demo
 //
-//  Copyright © 2018 True[X]. All rights reserved.
+//  Copyright © 2018 true[X]. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -18,7 +18,7 @@
 @property IMAAVPlayerVideoDisplay *videoDisplay;
 @property IMAStreamManager *streamManager;
 
-// The renderer that drives the True[X] Engagement experience.
+// The renderer that drives the true[X] Engagement experience.
 @property TruexAdRenderer *tar; // [2]
 
 // We keep track of which ad break we're in so we know how far to seek when skipping it.
@@ -37,9 +37,8 @@
     self.playerViewController.player = [AVPlayer new];
 
     self.videoDisplay = [[IMAAVPlayerVideoDisplay alloc] initWithAVPlayer:self.playerViewController.player];
-
-    IMAVODStreamRequest *streamRequest = [[IMAVODStreamRequest alloc] initWithContentSourceID:@"2479896" videoID:@"googleio-highlights"];
-
+    IMAVODStreamRequest *streamRequest = [[IMAVODStreamRequest alloc] initWithContentSourceID:@"2494430"
+                                                                                      videoID:@"googleio-highlights"];
     self.streamManager = [[IMAStreamManager alloc] initWithVideoDisplay:self.videoDisplay];
     self.streamManager.delegate = self;
     [self.streamManager requestStream:streamRequest];
@@ -58,37 +57,36 @@
 }
 
 - (void)streamManager:(IMAStreamManager *)streamManager adDidStart:(IMAAd *)ad {
-    // The True[X] Engagement information is stored in a VAST companion ad, so we look through all
+    // The true[X] Engagement information is stored in a VAST companion ad, so we look through all
     // available companions to see if there's anything to work with.
     for (IMACompanion *companion in ad.companions) {
         if ([companion.apiFramework isEqualToString:@"truex"]) { // [2]
-            // We pause the underlying stream in order to present the True[X] experience and seek over the current ad,
-            // which is just a placeholder for the True[X] ad.
+            // We pause the underlying stream in order to present the true[X] experience and seek over the current ad,
+            // which is just a placeholder for the true[X] ad.
             [self.playerViewController.player pause]; // [3]
             CMTime seekTime = CMTimeAdd(
                     self.playerViewController.player.currentTime,
                     CMTimeMakeWithSeconds(ad.duration, 1000)
             );
             [self.playerViewController.player seekToTime:seekTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-            // The companion had contains a URL (the "static resource URL") which tells us where to go to get the
+            // The companion ad contains a URL (the "static resource URL") which tells us where to go to get the
             // ad parameters for our Engagement.
-            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]]; // [4]
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:companion.staticResourceURL]];
-            NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                // Once we have the parameters, we figure out what kind of ad break we're in, and then we fire up
-                // the renderer.
-                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                NSString *slotType;
-                if (self.currentAdBreak.adBreakIndex == 0) {
-                    slotType = PREROLL;
-                }
-                else {
-                    slotType = MIDROLL;
-                }
-                self.tar = [[TruexAdRenderer alloc] initWithUrl:@"https://media.truex.com/placeholder.js" adParameters:jsonDict slotType:slotType]; // [5]
-                self.tar.delegate = self;
-            }];
-            [task resume];
+            NSString* base64Config = [companion.staticResourceURL componentsSeparatedByString:@","][1];
+            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:base64Config
+                                                                      options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            NSError* jsonError;
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:decodedData
+                                                                     options:kNilOptions
+                                                                       error:&jsonError];
+            if (jsonError) {
+                break;
+            }
+            NSString *slotType = self.currentAdBreak.adBreakIndex == 0 ? PREROLL : MIDROLL;
+            self.tar = [[TruexAdRenderer alloc] initWithUrl:@"https://media.truex.com/placeholder.js"
+                                               adParameters:jsonDict
+                                                   slotType:slotType]; // [5]
+            self.tar.delegate = self;
+
             break;
         }
     }
@@ -104,7 +102,7 @@
     NSLog(@"Did initialize stream: %@", streamID);
 }
 
-// MARK: - True[X] Ad Renderer Delegate Methods
+// MARK: - true[X] Ad Renderer Delegate Methods
 
 // A real application would probably have something to do here, but there's nothing we're strictly required to
 // do here in the simplest case.
