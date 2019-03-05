@@ -3,122 +3,105 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17AD44973FB49E82F8CF0162 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AD4BACD40EA05B262CE167 /* AppDelegate.m */; };
-		17AD453B4A10F7E2D29E74D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AD400B050B4960BDCB86B0 /* main.m */; };
-		17AD4713A85576DB6508F643 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AD43E7DD592272932D9666 /* Main.storyboard */; };
-		17AD4AB7FA162768ADAA2BC1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17AD443A7EE2C496C30C5809 /* ViewController.m */; };
-		17AD4D34B113FCC0AAD8A7EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17AD4CB6776B55A913053CCD /* Assets.xcassets */; };
-		1CBC08B1317956A187C9D337 /* Pods_DFP_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73D99003F0F20ABA51C7AAD /* Pods_DFP_Integration_Demo.framework */; };
+		00BD171BA035FCFFD184C2B0 /* Pods_DFP_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */; };
+		21AB2E5AE076753FF2D3342A /* Pods_DFP_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */; };
+		4039DD062227587F003FF448 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4039DD052227587F003FF448 /* AppDelegate.swift */; };
+		4039DD082227587F003FF448 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4039DD072227587F003FF448 /* ViewController.swift */; };
+		4039DD0B2227587F003FF448 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4039DD092227587F003FF448 /* Main.storyboard */; };
+		4039DD0D22275887003FF448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4039DD0C22275887003FF448 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		829F67DA20D2FA6C00777EA9 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		17AD400B050B4960BDCB86B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		17AD41FC4E3FB97DA78B665F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		17AD421EF85F8AB1AC2EBD21 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		17AD43713559AA54CE37EF6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		17AD443A7EE2C496C30C5809 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		17AD468330B3E3518E44A8D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
-		17AD4BACD40EA05B262CE167 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		17AD4CB6776B55A913053CCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		17AD4F9490ED6B17D2D3C413 /* DFP Integration Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DFP Integration Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		928B0ECF6A548DFB7DB588C9 /* Pods-DFP Integration Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.release.xcconfig"; sourceTree = "<group>"; };
-		E62DBC98592ADC8CC662CC0F /* Pods-DFP Integration Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		F73D99003F0F20ABA51C7AAD /* Pods_DFP_Integration_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DFP_Integration_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.release.xcconfig"; sourceTree = "<group>"; };
+		4039DD022227587F003FF448 /* DFP Integration Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DFP Integration Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4039DD052227587F003FF448 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4039DD072227587F003FF448 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4039DD0A2227587F003FF448 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4039DD0C22275887003FF448 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4039DD0E22275887003FF448 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DFP_Integration_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DFP_Integration_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		17AD4C2DA4F9CBE912D914B2 /* Frameworks */ = {
+		4039DCFF2227587F003FF448 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CBC08B1317956A187C9D337 /* Pods_DFP_Integration_Demo.framework in Frameworks */,
+				21AB2E5AE076753FF2D3342A /* Pods_DFP_Integration_Demo.framework in Frameworks */,
+				00BD171BA035FCFFD184C2B0 /* Pods_DFP_Integration_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F899F6F65574B78B7CA94C6 /* Frameworks */ = {
+		0E5E7C149F5BE5C8D2BDE771 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F73D99003F0F20ABA51C7AAD /* Pods_DFP_Integration_Demo.framework */,
+				CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */,
+				2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */,
 			);
-			name = Frameworks;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		17AD42DB059BDAB2BBA97F3B /* Products */ = {
+		4039DCF92227587F003FF448 = {
 			isa = PBXGroup;
 			children = (
-				17AD4F9490ED6B17D2D3C413 /* DFP Integration Demo.app */,
+				4039DD042227587F003FF448 /* DFP Integration Demo */,
+				4039DD032227587F003FF448 /* Products */,
+				0E5E7C149F5BE5C8D2BDE771 /* Pods */,
+				4922BE76271BF75CB3B368E9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4039DD032227587F003FF448 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4039DD022227587F003FF448 /* DFP Integration Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		17AD4579C5764655501F623B = {
+		4039DD042227587F003FF448 /* DFP Integration Demo */ = {
 			isa = PBXGroup;
 			children = (
-				17AD42DB059BDAB2BBA97F3B /* Products */,
-				17AD46282585EB75AFB747D2 /* DFP Integration Demo */,
-				EA4FDB5DBBBB5B9B7AB211F4 /* Pods */,
-				0F899F6F65574B78B7CA94C6 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		17AD46282585EB75AFB747D2 /* DFP Integration Demo */ = {
-			isa = PBXGroup;
-			children = (
-				17AD468330B3E3518E44A8D6 /* Info.plist */,
-				17AD4CB6776B55A913053CCD /* Assets.xcassets */,
-				17AD400B050B4960BDCB86B0 /* main.m */,
-				17AD41FC4E3FB97DA78B665F /* AppDelegate.h */,
-				17AD4BACD40EA05B262CE167 /* AppDelegate.m */,
-				17AD43E7DD592272932D9666 /* Main.storyboard */,
-				17AD421EF85F8AB1AC2EBD21 /* ViewController.h */,
-				17AD443A7EE2C496C30C5809 /* ViewController.m */,
+				4039DD052227587F003FF448 /* AppDelegate.swift */,
+				4039DD072227587F003FF448 /* ViewController.swift */,
+				4039DD092227587F003FF448 /* Main.storyboard */,
+				4039DD0C22275887003FF448 /* Assets.xcassets */,
+				4039DD0E22275887003FF448 /* Info.plist */,
 			);
 			path = "DFP Integration Demo";
 			sourceTree = "<group>";
 		};
-		EA4FDB5DBBBB5B9B7AB211F4 /* Pods */ = {
+		4922BE76271BF75CB3B368E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E62DBC98592ADC8CC662CC0F /* Pods-DFP Integration Demo.debug.xcconfig */,
-				928B0ECF6A548DFB7DB588C9 /* Pods-DFP Integration Demo.release.xcconfig */,
+				843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */,
+				EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		17AD48D6C1792B1C240529B4 /* DFP Integration Demo */ = {
+		4039DD012227587F003FF448 /* DFP Integration Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17AD45726AB24F11700CD07F /* Build configuration list for PBXNativeTarget "DFP Integration Demo" */;
+			buildConfigurationList = 4039DD1122275887003FF448 /* Build configuration list for PBXNativeTarget "DFP Integration Demo" */;
 			buildPhases = (
-				09401F139A3BEFEC997A2C25 /* [CP] Check Pods Manifest.lock */,
-				17AD4AB238E171D47CE7DAD1 /* Sources */,
-				17AD4C2DA4F9CBE912D914B2 /* Frameworks */,
-				17AD4FCFB6D842174FD63B8B /* Resources */,
-				C23AF52DC3E606DA43E107D6 /* [CP] Embed Pods Frameworks */,
-				7EAEC5ED1A0EE404292FBBD5 /* [CP] Copy Pods Resources */,
-				829F67DA20D2FA6C00777EA9 /* Embed Frameworks */,
+				A5231216010398AE03362BF0 /* [CP] Check Pods Manifest.lock */,
+				4039DCFE2227587F003FF448 /* Sources */,
+				4039DCFF2227587F003FF448 /* Frameworks */,
+				4039DD002227587F003FF448 /* Resources */,
+				F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */,
+				08E437E7E4D9D459A2D116E9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -126,69 +109,61 @@
 			);
 			name = "DFP Integration Demo";
 			productName = "DFP Integration Demo";
-			productReference = 17AD4F9490ED6B17D2D3C413 /* DFP Integration Demo.app */;
+			productReference = 4039DD022227587F003FF448 /* DFP Integration Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		17AD444F0E7C8A1660CD2947 /* Project object */ = {
+		4039DCFA2227587F003FF448 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "True[X]";
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "true[X]";
+				TargetAttributes = {
+					4039DD012227587F003FF448 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
 			};
-			buildConfigurationList = 17AD4592544185E734783839 /* Build configuration list for PBXProject "DFP Integration Demo" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			buildConfigurationList = 4039DCFD2227587F003FF448 /* Build configuration list for PBXProject "DFP Integration Demo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = 17AD4579C5764655501F623B;
-			productRefGroup = 17AD42DB059BDAB2BBA97F3B /* Products */;
+			mainGroup = 4039DCF92227587F003FF448;
+			productRefGroup = 4039DD032227587F003FF448 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				17AD48D6C1792B1C240529B4 /* DFP Integration Demo */,
+				4039DD012227587F003FF448 /* DFP Integration Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		17AD4FCFB6D842174FD63B8B /* Resources */ = {
+		4039DD002227587F003FF448 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17AD4D34B113FCC0AAD8A7EC /* Assets.xcassets in Resources */,
-				17AD4713A85576DB6508F643 /* Main.storyboard in Resources */,
+				4039DD0D22275887003FF448 /* Assets.xcassets in Resources */,
+				4039DD0B2227587F003FF448 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09401F139A3BEFEC997A2C25 /* [CP] Check Pods Manifest.lock */ = {
+		08E437E7E4D9D459A2D116E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DFP Integration Demo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7EAEC5ED1A0EE404292FBBD5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo-resources.sh",
@@ -196,6 +171,8 @@
 				"${PODS_ROOT}/YouiTVAdRenderer/YouiTVAdRenderer/YouiTVAdRenderer.framework/assets",
 			);
 			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Truex.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/assets",
@@ -205,10 +182,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C23AF52DC3E606DA43E107D6 /* [CP] Embed Pods Frameworks */ = {
+		A5231216010398AE03362BF0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DFP Integration Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo-frameworks.sh",
@@ -238,6 +239,8 @@
 				"${PODS_ROOT}/YouiTVAdRenderer/YouiTVAdRenderer/YouiTVAdRenderer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
@@ -272,23 +275,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		17AD4AB238E171D47CE7DAD1 /* Sources */ = {
+		4039DCFE2227587F003FF448 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17AD453B4A10F7E2D29E74D1 /* main.m in Sources */,
-				17AD44973FB49E82F8CF0162 /* AppDelegate.m in Sources */,
-				17AD4AB7FA162768ADAA2BC1 /* ViewController.m in Sources */,
+				4039DD082227587F003FF448 /* ViewController.swift in Sources */,
+				4039DD062227587F003FF448 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		17AD43E7DD592272932D9666 /* Main.storyboard */ = {
+		4039DD092227587F003FF448 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				17AD43713559AA54CE37EF6D /* Base */,
+				4039DD0A2227587F003FF448 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -296,110 +298,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		17AD4184EED42EE7E8EE7612 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E62DBC98592ADC8CC662CC0F /* Pods-DFP Integration Demo.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Moya\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Result\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SWXMLHash\"",
-					"\"${PODS_ROOT}/InnovidAdRenderer\"",
-					"\"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.2.1\"",
-					"$(PROJECT_DIR)/Frameworks",
-				);
-				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Truex.DFP-Integration-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = Debug;
-		};
-		17AD4494EEE42968047400B5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = appletvos;
-				TVOS_DEPLOYMENT_TARGET = 11.3;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		17AD46BC03D902C27E5652A1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 928B0ECF6A548DFB7DB588C9 /* Pods-DFP Integration Demo.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Moya\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Result\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SWXMLHash\"",
-					"\"${PODS_ROOT}/InnovidAdRenderer\"",
-					"\"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.2.1\"",
-					"$(PROJECT_DIR)/Frameworks",
-				);
-				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Truex.DFP-Integration-Demo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 3;
-			};
-			name = Release;
-		};
-		17AD4FCA10490E19920B3D53 /* Debug */ = {
+		4039DD0F22275887003FF448 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -449,35 +348,130 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = appletvos;
-				TVOS_DEPLOYMENT_TARGET = 11.3;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 12.1;
 			};
 			name = Debug;
+		};
+		4039DD1022275887003FF448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = appletvos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TVOS_DEPLOYMENT_TARGET = 12.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4039DD1222275887003FF448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "truex.DFP-Integration-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Debug;
+		};
+		4039DD1322275887003FF448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "truex.DFP-Integration-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 3;
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		17AD45726AB24F11700CD07F /* Build configuration list for PBXNativeTarget "DFP Integration Demo" */ = {
+		4039DCFD2227587F003FF448 /* Build configuration list for PBXProject "DFP Integration Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				17AD4184EED42EE7E8EE7612 /* Debug */,
-				17AD46BC03D902C27E5652A1 /* Release */,
+				4039DD0F22275887003FF448 /* Debug */,
+				4039DD1022275887003FF448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17AD4592544185E734783839 /* Build configuration list for PBXProject "DFP Integration Demo" */ = {
+		4039DD1122275887003FF448 /* Build configuration list for PBXNativeTarget "DFP Integration Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				17AD4FCA10490E19920B3D53 /* Debug */,
-				17AD4494EEE42968047400B5 /* Release */,
+				4039DD1222275887003FF448 /* Debug */,
+				4039DD1322275887003FF448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 17AD444F0E7C8A1660CD2947 /* Project object */;
+	rootObject = 4039DCFA2227587F003FF448 /* Project object */;
 }

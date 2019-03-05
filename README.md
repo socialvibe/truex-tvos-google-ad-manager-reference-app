@@ -7,17 +7,18 @@ be replicated in a real production app.
 
 # Assumptions
 
-I assume here that you have either already integrated the IMA SDK with your app, or you are
+We assume you have either already integrated the IMA SDK with your app, or you are
 working from a project that has been created following the instructions at the
 [IMA SDK Quickstart page](https://developers.google.com/interactive-media-ads/docs/sdks/tvos/quickstart).
-I also assume that you have already acquired the true[X] renderer code, either through
-CocoaPods or direct download, and have added to your project appropriately.
+We also assume you have already acquired the true[X] renderer code through
+[CocoaPods](https://github.com/socialvibe/cocoapod-specs) or direct download,
+and have added to your project appropriately.
 
 # References
 
-I have marked the source code with comments containing numbers in brackets: ("[3]", for
-example), that correlate with the steps listed below. If you want to see how to fetch ad
-parameters, search the `ViewController.m` file for `[4]` and you will find the related code.
+We've marked the source code with comments containing numbers in brackets: ("[3]", for
+example), that correlate with the steps listed below. For example, if you want to see how to parse ad
+parameters, search the `ViewController.swift` file for `[4]` and you will find the related code.
 
 # Steps
 
@@ -37,7 +38,12 @@ In the IMA delegate method `adDidStart`, we inspect the `IMAAd`'s `companion` pr
 any companion has an `apiFramework` value matching `truex`, then we ignore all other
 companions and begin the true[X] engagement experience.
 
-## [3] - Prepare to enter the engagement
+## [3] - Parse ad parameters
+
+The `IMACompanion` object contains a data URL which encodes parameters used
+by the true[X] renderer. We parse this base64 string into a JSON dictionary.
+
+## [4] - Prepare to enter the engagement
 
 By default, the underlying ads, which IMA has stitched into the stream, will keep playing,
 so the first we have to do is pause playback. There will also be a "placeholder" ad at the
@@ -45,12 +51,6 @@ first position of the ad break (this is the ad that contained the true[X] inform
 allowed us to enter the engagement in the first place), so we need to seek over that ad
 in any case. We will seek over the rest of the ad pod later, if the viewer earns that
 experience.
-
-## [4] - Fetch ad parameters
-
-The `IMACompanion` object contains a URL which points to some configuration data needed
-by the true[X] renderer. So, the first thing we have to do is go and fetch that. This
-is accomplished by standard means, using `NSURLSession` and `NSJSONSerialization`.
 
 ## [5] - Initialize and start the renderer
 
@@ -69,9 +69,9 @@ current ad break. This accomplishes the "reward" portion of the engagement.
 
 There are three ways the renderer can finish its job:
 
-1. There were no ads available, which causes it to finish almost right away.
-2. The ad had an error somehow.
-3. The viewer has completed the engagement.
+1. There were no ads available, which causes it to finish almost right away (`onNoAdsAvailable`)
+2. The ad had an error somehow. (`onAdError`)
+3. The viewer has completed the engagement. (`onAdFreePod`)
 
 In all three of these cases, the renderer will have already removed itself from view, so all
 we need to do is resume playback. If we had received the `onAdFreePod` delegate method earlier,

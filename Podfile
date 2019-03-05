@@ -1,3 +1,5 @@
+SWIFT_VERSION = '3.2'
+
 platform :tvos, '10.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
@@ -12,16 +14,16 @@ target 'DFP Integration Demo' do
 end
 
 post_install do |installer|
-    print "Setting the default SWIFT_VERSION to 3.3\n"
+    print "Setting the default SWIFT_VERSION to #{SWIFT_VERSION}\n"
     installer.pods_project.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '3.3'
+        config.build_settings['SWIFT_VERSION'] = "#{SWIFT_VERSION}"
     end
 
     installer.pods_project.targets.each do |target|
         if ['DFP Integration Demo'].include? "#{target}"
-            print "Setting #{target}'s SWIFT_VERSION to 3.3\n"
+            print "Setting #{target}'s SWIFT_VERSION to #{SWIFT_VERSION}\n"
             target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.3'
+                config.build_settings['SWIFT_VERSION'] = "#{SWIFT_VERSION}"
             end
         else
             print "Setting #{target}'s SWIFT_VERSION to Undefined (Xcode will automatically resolve)\n"
