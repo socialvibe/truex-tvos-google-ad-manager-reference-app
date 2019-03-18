@@ -9,7 +9,11 @@ import AVKit
 import InteractiveMediaAds
 import TruexAdRenderer
 
-class ViewController: UIViewController, IMAStreamManagerDelegate, TruexAdRendererDelegate {
+class ViewController: UIViewController,
+                        IMAStreamManagerDelegate,
+                        TruexAdRendererDelegate,
+                        AVPlayerViewControllerDelegate {
+    
     // These four properties allow us to do the basic work of playing back ad-stitched video.
     private var playerViewController: AVPlayerViewController
     private var player: AVPlayer
@@ -22,6 +26,7 @@ class ViewController: UIViewController, IMAStreamManagerDelegate, TruexAdRendere
     // [1]
     // We keep track of which ad break we're in so we know how far to seek when skipping it.
     private var currentAdBreak: IMAAdBreakInfo?
+    private var userSeekTime: CMTime?
     
     required init?(coder decoder: NSCoder) {
         playerViewController = AVPlayerViewController()
@@ -35,6 +40,7 @@ class ViewController: UIViewController, IMAStreamManagerDelegate, TruexAdRendere
         super.init(coder: decoder)
         
         streamManager.delegate = self
+        playerViewController.delegate = self
     }
     
     //MARK: - View Controller Methods
@@ -56,6 +62,7 @@ class ViewController: UIViewController, IMAStreamManagerDelegate, TruexAdRendere
         // [1]
         // Keep track of this for later use. adBreakDidStart should fire before adDidStart in all cases.
         currentAdBreak = adBreakInfo
+        allowSeeks(false)
     }
 
     func streamManager(_ streamManager: IMAStreamManager?, adDidStart ad: IMAAd?) {
@@ -117,6 +124,22 @@ class ViewController: UIViewController, IMAStreamManagerDelegate, TruexAdRendere
         }
     }
 
+    func streamManager(_ streamManager: IMAStreamManager?, adBreakDidEnd adBreakInfo: IMAAdBreakInfo?) {
+        allowSeeks(true)
+        seekToUserTime()
+    }
+    
+    private func seekToUserTime() {
+        if let userSeekTime = self.userSeekTime {
+            player.seek(to: userSeekTime, toleranceBefore: .zero, toleranceAfter: .zero)
+            self.userSeekTime = nil
+        }
+    }
+    
+    private func allowSeeks(_ isSeekingAllowed: Bool) {
+        playerViewController.requiresLinearPlayback = !isSeekingAllowed
+    }
+    
     // MARK: - true[X] Ad Renderer Delegate Methods
     
     // A real application would probably have something to do here, but there's nothing we're strictly required to
@@ -173,5 +196,19 @@ class ViewController: UIViewController, IMAStreamManagerDelegate, TruexAdRendere
     func onFetchAdComplete() {
         // [5]
         adRenderer?.start(playerViewController)
+    }
+    
+    // MARK: AVPlayer delegate
+    func playerViewController(_ playerViewController: AVPlayerViewController,
+                              timeToSeekAfterUserNavigatedFrom oldTime: CMTime,
+                              to targetTime: CMTime) -> CMTime {
+        let targetTimeSeconds = CMTimeGetSeconds(targetTime)
+        let prevCuepoint = self.streamManager.previousCuepoint(forStreamTime: targetTimeSeconds)
+        // Ensure the viewer cannot seek past an unplayed ad
+        if let prevCuepoint = prevCuepoint, !prevCuepoint.isPlayed {
+            self.userSeekTime = targetTime;
+            return CMTimeMakeWithSeconds(prevCuepoint.startTime, preferredTimescale: 1)
+        }
+        return targetTime
     }
 }
