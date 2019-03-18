@@ -97,7 +97,7 @@ class ViewController: UIViewController,
         // We pause the underlying stream in order to present the true[X] experience and seek over the current ad,
         // which is just a placeholder for the true[X] ad.
         player.pause()
-        let seekTime = player.currentTime() + CMTimeMakeWithSeconds(ad?.duration ?? 0, preferredTimescale: 1)
+        let seekTime = player.currentTime() + CMTimeMakeWithSeconds(ad?.duration ?? 0, preferredTimescale: 1000)
         player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
         // Slot type constants are defined in TruexConstants.h
         let slotType = currentAdBreak?.adBreakIndex == 0 ? PREROLL : MIDROLL
@@ -158,7 +158,7 @@ class ViewController: UIViewController,
     func onAdFreePod() {
         if let adBreak = currentAdBreak {
             let seekTime = CMTimeMakeWithSeconds(adBreak.timeOffset + adBreak.duration,
-                                                 preferredTimescale: 1)
+                                                 preferredTimescale: 1000)
             player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
         }
     }
@@ -207,7 +207,7 @@ class ViewController: UIViewController,
         // Ensure the viewer cannot seek past an unplayed ad
         if let prevCuepoint = prevCuepoint, !prevCuepoint.isPlayed {
             self.userSeekTime = targetTime;
-            return CMTimeMakeWithSeconds(prevCuepoint.startTime, preferredTimescale: 1)
+            return CMTimeMakeWithSeconds(prevCuepoint.startTime, preferredTimescale: 1000)
         }
         return targetTime
     }
