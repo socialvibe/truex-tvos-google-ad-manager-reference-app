@@ -18,7 +18,7 @@ and have added to your project appropriately.
 
 We've marked the source code with comments containing numbers in brackets: ("[3]", for
 example), that correlate with the steps listed below. For example, if you want to see how to parse ad
-parameters, search the `ViewController.swift` file for `[4]` and you will find the related code.
+parameters, search the `PlayerViewController.swift` file for `[4]` and you will find the related code.
 
 # Steps
 

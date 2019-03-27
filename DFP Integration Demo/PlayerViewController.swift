@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  PlayerViewController.swift
 //  DFP Integration Demo
 //
 //  Copyright © 2019 true[X]. All rights reserved.
@@ -9,16 +9,25 @@ import AVKit
 import InteractiveMediaAds
 import TruexAdRenderer
 
-class ViewController: UIViewController,
-                        IMAStreamManagerDelegate,
-                        TruexAdRendererDelegate,
-                        AVPlayerViewControllerDelegate {
-    
+class PlayerViewController: UIViewController,
+                            IMAStreamManagerDelegate,
+                            TruexAdRendererDelegate,
+                            AVPlayerViewControllerDelegate {
+    // Properties needed to initialize a stream with the IMA SDK
+    private var contentSourceID: String = "2494430"
+    private var videoID: String = "googleio-highlights"
+
     // These four properties allow us to do the basic work of playing back ad-stitched video.
     private var playerViewController: AVPlayerViewController
     private var player: AVPlayer
     private var videoDisplay: IMAAVPlayerVideoDisplay
     private var streamManager: IMAStreamManager
+    
+    // Variables used to display a loading screen
+    private var loadingImage: UIImageView
+    private var loadingOverlay: UIView
+    private var loadingIndicator: UIActivityIndicatorView
+    private var playerItemContext = 0
     
     // The renderer that drives the true[X] Engagement experience.
     private var adRenderer: TruexAdRenderer?
@@ -28,32 +37,71 @@ class ViewController: UIViewController,
     private var currentAdBreak: IMAAdBreakInfo?
     private var userSeekTime: CMTime?
     
+    // Setter for content stream
+    func setStream(contentSourceID: String, videoID: String) {
+        self.contentSourceID = contentSourceID
+        self.videoID = videoID
+    }
+    
+    // Display a loading screen via an overlay on a designated image
+    func displayLoadingScreen(_ screen: UIImage) {
+        loadingImage.image = screen
+        loadingImage.frame = UIScreen.main.bounds
+        loadingOverlay.frame = UIScreen.main.bounds
+        loadingOverlay.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.75)
+        loadingIndicator.center = CGPoint(x: UIScreen.main.bounds.midX,
+                                          y: UIScreen.main.bounds.midY)
+        loadingIndicator.startAnimating()
+    }
+    
+    // Hides the loading screen
+    private func hideLoadingScreen() {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut, animations: {
+            self.loadingImage.alpha = 0
+            self.loadingOverlay.alpha = 0
+        }, completion : { finished in
+            self.loadingIndicator.stopAnimating()
+        })
+    }
+    
     required init?(coder decoder: NSCoder) {
         playerViewController = AVPlayerViewController()
         player = AVPlayer()
         playerViewController.player = player
+        loadingImage = UIImageView()
+        loadingOverlay = UIView()
+        loadingIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        loadingIndicator.color = .white
 
         videoDisplay = IMAAVPlayerVideoDisplay(avPlayer: playerViewController.player)
-        
         streamManager = IMAStreamManager(videoDisplay: videoDisplay)
 
         super.init(coder: decoder)
         
         streamManager.delegate = self
         playerViewController.delegate = self
+        playerViewController.view.addSubview(loadingImage)
+        playerViewController.view.addSubview(loadingOverlay)
+        playerViewController.view.addSubview(loadingIndicator)
+
+        // Observe the player's status changes in order to hide loading screen
+        player.addObserver(self,
+                           forKeyPath: #keyPath(AVPlayerItem.status),
+                           options: [.new, .old],
+                           context: &playerItemContext)
     }
     
     //MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let streamRequest = IMAVODStreamRequest(contentSourceID: "2494430", videoID: "googleio-highlights")
+        let streamRequest = IMAVODStreamRequest(contentSourceID: contentSourceID, videoID: videoID)
         streamManager.requestStream(streamRequest)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         present(playerViewController, animated: false)
     }
     
@@ -211,4 +259,35 @@ class ViewController: UIViewController,
         }
         return targetTime
     }
+    
+    // Hide loading screen when the player is ready
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
+        // Only handle observations for the playerItemContext
+        guard context == &playerItemContext else {
+            super.observeValue(forKeyPath: keyPath,
+                               of: object,
+                               change: change,
+                               context: context)
+            return
+        }
+        
+        if keyPath == #keyPath(AVPlayerItem.status) {
+            let status: AVPlayerItem.Status
+            if let statusNumber = change?[.newKey] as? NSNumber {
+                status = AVPlayerItem.Status(rawValue: statusNumber.intValue)!
+            } else {
+                status = .unknown
+            }
+            switch status {
+                case .readyToPlay:
+                    hideLoadingScreen()
+                default:
+                    break
+            }
+        }
+    }
+
 }

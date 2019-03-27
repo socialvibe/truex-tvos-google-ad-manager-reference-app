@@ -10,7 +10,6 @@
     {
       "orientation" : "landscape",
       "idiom" : "tv",
-      "filename" : "true_vision-loading_screen.png",
       "extent" : "full-screen",
       "minimum-system-version" : "9.0",
       "scale" : "1x"

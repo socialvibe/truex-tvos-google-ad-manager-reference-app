@@ -9,20 +9,26 @@
 /* Begin PBXBuildFile section */
 		00BD171BA035FCFFD184C2B0 /* Pods_DFP_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */; };
 		21AB2E5AE076753FF2D3342A /* Pods_DFP_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */; };
+		400F60BA223062A800A199E2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F60B9223062A800A199E2 /* HomeViewController.swift */; };
 		4039DD062227587F003FF448 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4039DD052227587F003FF448 /* AppDelegate.swift */; };
-		4039DD082227587F003FF448 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4039DD072227587F003FF448 /* ViewController.swift */; };
+		4039DD082227587F003FF448 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4039DD072227587F003FF448 /* PlayerViewController.swift */; };
 		4039DD0B2227587F003FF448 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4039DD092227587F003FF448 /* Main.storyboard */; };
 		4039DD0D22275887003FF448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4039DD0C22275887003FF448 /* Assets.xcassets */; };
+		40E0E1B92243043A00E7AC53 /* StreamDisplayViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0E1B82243043A00E7AC53 /* StreamDisplayViewCell.swift */; };
+		40E0E1BB224304F300E7AC53 /* StreamConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0E1BA224304F300E7AC53 /* StreamConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.release.xcconfig"; sourceTree = "<group>"; };
+		400F60B9223062A800A199E2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4039DD022227587F003FF448 /* DFP Integration Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DFP Integration Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4039DD052227587F003FF448 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4039DD072227587F003FF448 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4039DD072227587F003FF448 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4039DD0A2227587F003FF448 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4039DD0C22275887003FF448 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4039DD0E22275887003FF448 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40E0E1B82243043A00E7AC53 /* StreamDisplayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDisplayViewCell.swift; sourceTree = "<group>"; };
+		40E0E1BA224304F300E7AC53 /* StreamConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamConfiguration.swift; sourceTree = "<group>"; };
 		843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DFP_Integration_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DFP_Integration_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,10 +78,13 @@
 			isa = PBXGroup;
 			children = (
 				4039DD052227587F003FF448 /* AppDelegate.swift */,
-				4039DD072227587F003FF448 /* ViewController.swift */,
+				400F60B9223062A800A199E2 /* HomeViewController.swift */,
+				4039DD072227587F003FF448 /* PlayerViewController.swift */,
 				4039DD092227587F003FF448 /* Main.storyboard */,
 				4039DD0C22275887003FF448 /* Assets.xcassets */,
 				4039DD0E22275887003FF448 /* Info.plist */,
+				40E0E1B82243043A00E7AC53 /* StreamDisplayViewCell.swift */,
+				40E0E1BA224304F300E7AC53 /* StreamConfiguration.swift */,
 			);
 			path = "DFP Integration Demo";
 			sourceTree = "<group>";
@@ -279,8 +288,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4039DD082227587F003FF448 /* ViewController.swift in Sources */,
+				4039DD082227587F003FF448 /* PlayerViewController.swift in Sources */,
 				4039DD062227587F003FF448 /* AppDelegate.swift in Sources */,
+				400F60BA223062A800A199E2 /* HomeViewController.swift in Sources */,
+				40E0E1B92243043A00E7AC53 /* StreamDisplayViewCell.swift in Sources */,
+				40E0E1BB224304F300E7AC53 /* StreamConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +429,7 @@
 			baseConfigurationReference = CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Launch Image";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -436,7 +448,7 @@
 			baseConfigurationReference = 2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Launch Image";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
