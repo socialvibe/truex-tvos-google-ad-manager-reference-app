@@ -13,21 +13,18 @@ class PlayerViewController: UIViewController,
                             IMAStreamManagerDelegate,
                             TruexAdRendererDelegate,
                             AVPlayerViewControllerDelegate {
+    // MARK: [CHANGE ME]
     // Properties needed to initialize a stream with the IMA SDK
+    // Values should be set based on your stream
     private var contentSourceID: String = "2494430"
     private var videoID: String = "googleio-highlights"
-
+    
+    // MARK: [REQUIRED]
     // These four properties allow us to do the basic work of playing back ad-stitched video.
     private var playerViewController: AVPlayerViewController
     private var player: AVPlayer
     private var videoDisplay: IMAAVPlayerVideoDisplay
     private var streamManager: IMAStreamManager
-    
-    // Variables used to display a loading screen
-    private var loadingImage: UIImageView
-    private var loadingOverlay: UIView
-    private var loadingIndicator: UIActivityIndicatorView
-    private var playerItemContext = 0
     
     // The renderer that drives the true[X] Engagement experience.
     private var adRenderer: TruexAdRenderer?
@@ -35,44 +32,25 @@ class PlayerViewController: UIViewController,
     // [1]
     // We keep track of which ad break we're in so we know how far to seek when skipping it.
     private var currentAdBreak: IMAAdBreakInfo?
+    
+    // MARK: [OPTIONAL]
+    // Variables used to display a loading screen
+    private var loadingImage: UIImageView = UIImageView()
+    private var loadingOverlay: UIView = UIView()
+    private var loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    private var playerItemContext = 0
+    
+    // To save the viewer's seek time if a seek is interrupted by an ad break
     private var userSeekTime: CMTime?
+
     
-    // Setter for content stream
-    func setStream(contentSourceID: String, videoID: String) {
-        self.contentSourceID = contentSourceID
-        self.videoID = videoID
-    }
-    
-    // Display a loading screen via an overlay on a designated image
-    func displayLoadingScreen(_ screen: UIImage) {
-        loadingImage.image = screen
-        loadingImage.frame = UIScreen.main.bounds
-        loadingOverlay.frame = UIScreen.main.bounds
-        loadingOverlay.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.75)
-        loadingIndicator.center = CGPoint(x: UIScreen.main.bounds.midX,
-                                          y: UIScreen.main.bounds.midY)
-        loadingIndicator.startAnimating()
-    }
-    
-    // Hides the loading screen
-    private func hideLoadingScreen() {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut, animations: {
-            self.loadingImage.alpha = 0
-            self.loadingOverlay.alpha = 0
-        }, completion : { finished in
-            self.loadingIndicator.stopAnimating()
-        })
-    }
-    
+    // MARK: - View Controller Overrides
+    // MARK: [REQUIRED]
     required init?(coder decoder: NSCoder) {
         playerViewController = AVPlayerViewController()
         player = AVPlayer()
         playerViewController.player = player
-        loadingImage = UIImageView()
-        loadingOverlay = UIView()
-        loadingIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        loadingIndicator.color = .white
-
+        
         videoDisplay = IMAAVPlayerVideoDisplay(avPlayer: playerViewController.player)
         streamManager = IMAStreamManager(videoDisplay: videoDisplay)
 
@@ -80,18 +58,10 @@ class PlayerViewController: UIViewController,
         
         streamManager.delegate = self
         playerViewController.delegate = self
-        playerViewController.view.addSubview(loadingImage)
-        playerViewController.view.addSubview(loadingOverlay)
-        playerViewController.view.addSubview(loadingIndicator)
 
-        // Observe the player's status changes in order to hide loading screen
-        player.addObserver(self,
-                           forKeyPath: #keyPath(AVPlayerItem.status),
-                           options: [.new, .old],
-                           context: &playerItemContext)
+        /* [OPTIONAL] */ listenForPlayerStatus()
     }
     
-    //MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -105,7 +75,8 @@ class PlayerViewController: UIViewController,
         present(playerViewController, animated: false)
     }
     
-    //MARK: - IMA Stream Manager Delegate Methods
+    // MARK: - IMA Stream Manager Delegate Methods
+    // MARK: [REQUIRED]
     func streamManager(_ streamManager: IMAStreamManager?, adBreakDidStart adBreakInfo: IMAAdBreakInfo?) {
         // [1]
         // Keep track of this for later use. adBreakDidStart should fire before adDidStart in all cases.
@@ -174,24 +145,15 @@ class PlayerViewController: UIViewController,
 
     func streamManager(_ streamManager: IMAStreamManager?, adBreakDidEnd adBreakInfo: IMAAdBreakInfo?) {
         allowSeeks(true)
-        seekToUserTime()
-    }
-    
-    private func seekToUserTime() {
-        if let userSeekTime = self.userSeekTime {
-            player.seek(to: userSeekTime, toleranceBefore: .zero, toleranceAfter: .zero)
-            self.userSeekTime = nil
-        }
-    }
-    
-    private func allowSeeks(_ isSeekingAllowed: Bool) {
-        playerViewController.requiresLinearPlayback = !isSeekingAllowed
+        /* [OPTIONAL] */ seekToUserTime()
     }
     
     // MARK: - true[X] Ad Renderer Delegate Methods
+    // MARK: [REQUIRED]
     
-    // A real application would probably have something to do here, but there's nothing we're strictly required to
-    // do here in the simplest case.
+    // A real application may use this delegate to implement a timeout
+    // If this delegate is not fired after a set amount of time, the renderer can be stopped with adRenderer?.stop()
+    // Then normal video ads can be shown instead
     func onAdStarted(_ campaignName: String?) {
         if let campaignName = campaignName {
             print("Did start ad: \(campaignName)")
@@ -246,7 +208,8 @@ class PlayerViewController: UIViewController,
         adRenderer?.start(playerViewController)
     }
     
-    // MARK: AVPlayer delegate
+    // MARK: - AV Player Delegate Methods
+    // MARK: [OPTIONAL]
     func playerViewController(_ playerViewController: AVPlayerViewController,
                               timeToSeekAfterUserNavigatedFrom oldTime: CMTime,
                               to targetTime: CMTime) -> CMTime {
@@ -260,6 +223,8 @@ class PlayerViewController: UIViewController,
         return targetTime
     }
     
+    // MARK: - NS Object Overrides
+    // MARK: [OPTIONAL]
     // Hide loading screen when the player is ready
     override func observeValue(forKeyPath keyPath: String?,
                                of object: Any?,
@@ -290,4 +255,54 @@ class PlayerViewController: UIViewController,
         }
     }
 
+    // MARK: - Player View Controller Utilities
+    // MARK: [OPTIONAL]
+    // Setter for content stream
+    func setStream(contentSourceID: String, videoID: String) {
+        self.contentSourceID = contentSourceID
+        self.videoID = videoID
+    }
+    
+    // Display a loading screen via an overlay on a designated image
+    func displayLoadingScreen(_ screen: UIImage) {
+        playerViewController.view.addSubview(loadingImage)
+        playerViewController.view.addSubview(loadingOverlay)
+        playerViewController.view.addSubview(loadingIndicator)
+        loadingIndicator.color = .white
+        loadingImage.image = screen
+        loadingImage.frame = UIScreen.main.bounds
+        loadingOverlay.frame = UIScreen.main.bounds
+        loadingOverlay.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.75)
+        loadingIndicator.center = CGPoint(x: UIScreen.main.bounds.midX,
+                                          y: UIScreen.main.bounds.midY)
+        loadingIndicator.startAnimating()
+    }
+    
+    // Hides the loading screen
+    private func hideLoadingScreen() {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseOut, animations: {
+            self.loadingImage.alpha = 0
+            self.loadingOverlay.alpha = 0
+        }, completion : { finished in
+            self.loadingIndicator.stopAnimating()
+        })
+    }
+    
+    private func seekToUserTime() {
+        if let userSeekTime = self.userSeekTime {
+            player.seek(to: userSeekTime, toleranceBefore: .zero, toleranceAfter: .zero)
+            self.userSeekTime = nil
+        }
+    }
+    
+    private func allowSeeks(_ isSeekingAllowed: Bool) {
+        playerViewController.requiresLinearPlayback = !isSeekingAllowed
+    }
+    
+    private func listenForPlayerStatus() {
+        player.addObserver(self,
+                           forKeyPath: #keyPath(AVPlayerItem.status),
+                           options: [.new, .old],
+                           context: &playerItemContext)
+    }
 }

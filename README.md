@@ -20,6 +20,9 @@ We've marked the source code with comments containing numbers in brackets: ("[3]
 example), that correlate with the steps listed below. For example, if you want to see how to parse ad
 parameters, search the `PlayerViewController.swift` file for `[4]` and you will find the related code.
 
+Within this integrating class, sections of code are marked [REQUIRED], [CHANGE ME], and [OPTIONAL] relative
+to using the true[X] Ad Renderer within your app.
+
 # Steps
 
 ## [1] - Keep track of the current ad break
