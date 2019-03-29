@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00BD171BA035FCFFD184C2B0 /* Pods_DFP_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */; };
-		21AB2E5AE076753FF2D3342A /* Pods_DFP_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */; };
+		1F8AF54E17A7954E175C1F03 /* Pods_TruexGoogleReferenceApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04B8B3D321D57AB1FA0F11E /* Pods_TruexGoogleReferenceApp.framework */; };
 		400F60BA223062A800A199E2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F60B9223062A800A199E2 /* HomeViewController.swift */; };
 		4039DD062227587F003FF448 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4039DD052227587F003FF448 /* AppDelegate.swift */; };
 		4039DD082227587F003FF448 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4039DD072227587F003FF448 /* PlayerViewController.swift */; };
@@ -19,9 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.release.xcconfig"; sourceTree = "<group>"; };
+		2EDCFA406C45395263034AEA /* Pods-TruexGoogleReferenceApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TruexGoogleReferenceApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp.release.xcconfig"; sourceTree = "<group>"; };
 		400F60B9223062A800A199E2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		4039DD022227587F003FF448 /* DFP Integration Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DFP Integration Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4039DD022227587F003FF448 /* TruexGoogleReferenceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TruexGoogleReferenceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4039DD052227587F003FF448 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4039DD072227587F003FF448 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		4039DD0A2227587F003FF448 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -29,9 +28,8 @@
 		4039DD0E22275887003FF448 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E0E1B82243043A00E7AC53 /* StreamDisplayViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamDisplayViewCell.swift; sourceTree = "<group>"; };
 		40E0E1BA224304F300E7AC53 /* StreamConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamConfiguration.swift; sourceTree = "<group>"; };
-		843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DFP_Integration_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DFP Integration Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DFP_Integration_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C04B8B3D321D57AB1FA0F11E /* Pods_TruexGoogleReferenceApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TruexGoogleReferenceApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD3EF61D5C143958C3515C5F /* Pods-TruexGoogleReferenceApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TruexGoogleReferenceApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,8 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21AB2E5AE076753FF2D3342A /* Pods_DFP_Integration_Demo.framework in Frameworks */,
-				00BD171BA035FCFFD184C2B0 /* Pods_DFP_Integration_Demo.framework in Frameworks */,
+				1F8AF54E17A7954E175C1F03 /* Pods_TruexGoogleReferenceApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +47,8 @@
 		0E5E7C149F5BE5C8D2BDE771 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */,
-				2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */,
+				CD3EF61D5C143958C3515C5F /* Pods-TruexGoogleReferenceApp.debug.xcconfig */,
+				2EDCFA406C45395263034AEA /* Pods-TruexGoogleReferenceApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -59,7 +56,7 @@
 		4039DCF92227587F003FF448 = {
 			isa = PBXGroup;
 			children = (
-				4039DD042227587F003FF448 /* DFP Integration Demo */,
+				4039DD042227587F003FF448 /* TruexGoogleReferenceApp */,
 				4039DD032227587F003FF448 /* Products */,
 				0E5E7C149F5BE5C8D2BDE771 /* Pods */,
 				4922BE76271BF75CB3B368E9 /* Frameworks */,
@@ -69,12 +66,12 @@
 		4039DD032227587F003FF448 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4039DD022227587F003FF448 /* DFP Integration Demo.app */,
+				4039DD022227587F003FF448 /* TruexGoogleReferenceApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4039DD042227587F003FF448 /* DFP Integration Demo */ = {
+		4039DD042227587F003FF448 /* TruexGoogleReferenceApp */ = {
 			isa = PBXGroup;
 			children = (
 				4039DD052227587F003FF448 /* AppDelegate.swift */,
@@ -86,14 +83,13 @@
 				40E0E1B82243043A00E7AC53 /* StreamDisplayViewCell.swift */,
 				40E0E1BA224304F300E7AC53 /* StreamConfiguration.swift */,
 			);
-			path = "DFP Integration Demo";
+			path = TruexGoogleReferenceApp;
 			sourceTree = "<group>";
 		};
 		4922BE76271BF75CB3B368E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				843F265E389B82F9C6393934 /* Pods_DFP_Integration_Demo.framework */,
-				EF8BA0141C967D38F915455C /* Pods_DFP_Integration_Demo.framework */,
+				C04B8B3D321D57AB1FA0F11E /* Pods_TruexGoogleReferenceApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -101,9 +97,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4039DD012227587F003FF448 /* DFP Integration Demo */ = {
+		4039DD012227587F003FF448 /* TruexGoogleReferenceApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4039DD1122275887003FF448 /* Build configuration list for PBXNativeTarget "DFP Integration Demo" */;
+			buildConfigurationList = 4039DD1122275887003FF448 /* Build configuration list for PBXNativeTarget "TruexGoogleReferenceApp" */;
 			buildPhases = (
 				A5231216010398AE03362BF0 /* [CP] Check Pods Manifest.lock */,
 				4039DCFE2227587F003FF448 /* Sources */,
@@ -116,9 +112,9 @@
 			);
 			dependencies = (
 			);
-			name = "DFP Integration Demo";
-			productName = "DFP Integration Demo";
-			productReference = 4039DD022227587F003FF448 /* DFP Integration Demo.app */;
+			name = TruexGoogleReferenceApp;
+			productName = TruexGoogleReferenceApp;
+			productReference = 4039DD022227587F003FF448 /* TruexGoogleReferenceApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -136,7 +132,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4039DCFD2227587F003FF448 /* Build configuration list for PBXProject "DFP Integration Demo" */;
+			buildConfigurationList = 4039DCFD2227587F003FF448 /* Build configuration list for PBXProject "TruexGoogleReferenceApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -149,7 +145,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4039DD012227587F003FF448 /* DFP Integration Demo */,
+				4039DD012227587F003FF448 /* TruexGoogleReferenceApp */,
 			);
 		};
 /* End PBXProject section */
@@ -175,7 +171,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TruexAdRenderer/Truex.bundle",
 				"${PODS_ROOT}/YouiTVAdRenderer/YouiTVAdRenderer/YouiTVAdRenderer.framework/assets",
 			);
@@ -188,7 +184,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A5231216010398AE03362BF0 /* [CP] Check Pods Manifest.lock */ = {
@@ -206,7 +202,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DFP Integration Demo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-TruexGoogleReferenceApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -221,7 +217,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${PODS_ROOT}/../IMA/InteractiveMediaAds.framework",
@@ -278,7 +274,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DFP Integration Demo/Pods-DFP Integration Demo-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -426,17 +422,17 @@
 		};
 		4039DD1222275887003FF448 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD3EF61D5C143958C3515C5F /* Pods-DFP Integration Demo.debug.xcconfig */;
+			baseConfigurationReference = CD3EF61D5C143958C3515C5F /* Pods-TruexGoogleReferenceApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Launch Image";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
+				INFOPLIST_FILE = TruexGoogleReferenceApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "truex.DFP-Integration-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.truex.googlereferenceapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -445,17 +441,17 @@
 		};
 		4039DD1322275887003FF448 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2EDCFA406C45395263034AEA /* Pods-DFP Integration Demo.release.xcconfig */;
+			baseConfigurationReference = 2EDCFA406C45395263034AEA /* Pods-TruexGoogleReferenceApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Launch Image";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "DFP Integration Demo/Info.plist";
+				INFOPLIST_FILE = TruexGoogleReferenceApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "truex.DFP-Integration-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.truex.googlereferenceapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -465,7 +461,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4039DCFD2227587F003FF448 /* Build configuration list for PBXProject "DFP Integration Demo" */ = {
+		4039DCFD2227587F003FF448 /* Build configuration list for PBXProject "TruexGoogleReferenceApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4039DD0F22275887003FF448 /* Debug */,
@@ -474,7 +470,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4039DD1122275887003FF448 /* Build configuration list for PBXNativeTarget "DFP Integration Demo" */ = {
+		4039DD1122275887003FF448 /* Build configuration list for PBXNativeTarget "TruexGoogleReferenceApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4039DD1222275887003FF448 /* Debug */,

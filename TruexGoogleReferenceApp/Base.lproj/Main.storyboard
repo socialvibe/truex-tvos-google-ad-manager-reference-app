@@ -13,7 +13,7 @@
         <!--PlayerViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="PlayerViewController" customClass="PlayerViewController" customModule="DFP_Integration_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="PlayerViewController" customClass="PlayerViewController" customModule="TruexGoogleReferenceApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -31,7 +31,7 @@
         <!--HomeViewController-->
         <scene sceneID="WqV-3B-o8o">
             <objects>
-                <viewController id="MdW-DU-ihR" userLabel="HomeViewController" customClass="HomeViewController" customModule="DFP_Integration_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MdW-DU-ihR" userLabel="HomeViewController" customClass="HomeViewController" customModule="TruexGoogleReferenceApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tdr-mO-Xw3"/>
                         <viewControllerLayoutGuide type="bottom" id="2hf-SR-Uck"/>
@@ -63,7 +63,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StreamDisplayCell" id="9Qz-Mb-DUM" customClass="StreamDisplayViewCell" customModule="DFP_Integration_Demo" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StreamDisplayCell" id="9Qz-Mb-DUM" customClass="StreamDisplayViewCell" customModule="TruexGoogleReferenceApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="57" width="193" height="368"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

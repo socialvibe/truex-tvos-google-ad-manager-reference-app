@@ -1,6 +1,6 @@
 //
 //  PlayerViewController.swift
-//  DFP Integration Demo
+//  TruexGoogleReferenceApp
 //
 //  Copyright © 2019 true[X]. All rights reserved.
 //

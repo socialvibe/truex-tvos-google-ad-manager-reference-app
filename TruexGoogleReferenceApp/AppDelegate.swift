@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  DFP Integration Demo
+//  TruexGoogleReferenceApp
 //
 //  Copyright © 2019 true[X]. All rights reserved.
 //
@@ -42,4 +42,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

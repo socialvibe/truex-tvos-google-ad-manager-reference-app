@@ -1,7 +1,7 @@
 # Overview
 
 This project contains sample source code that demonstrates how to integrate the true[X]
-ad renderer with the DFP IMA SDK in tvOS. This document will step through the
+ad renderer with the Google Ad Manager IMA SDK in tvOS. This document will step through the
 various pieces of code that make the integration work, so that the same basic ideas can
 be replicated in a real production app.
 

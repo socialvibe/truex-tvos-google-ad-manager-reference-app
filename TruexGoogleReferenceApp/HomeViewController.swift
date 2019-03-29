@@ -1,8 +1,7 @@
 //
 //  HomeViewController.swift
-//  DFP Integration Demo
+//  TruexGoogleReferenceApp
 //
-//  Created by Isaiah Mann on 3/6/19.
 //  Copyright © 2019 true[X]. All rights reserved.
 //
 

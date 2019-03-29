@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4039DD012227587F003FF448"
-               BuildableName = "DFP Integration Demo.app"
-               BlueprintName = "DFP Integration Demo"
-               ReferencedContainer = "container:DFP Integration Demo.xcodeproj">
+               BuildableName = "TruexGoogleReferenceApp.app"
+               BlueprintName = "TruexGoogleReferenceApp"
+               ReferencedContainer = "container:TruexGoogleReferenceApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4039DD012227587F003FF448"
-            BuildableName = "DFP Integration Demo.app"
-            BlueprintName = "DFP Integration Demo"
-            ReferencedContainer = "container:DFP Integration Demo.xcodeproj">
+            BuildableName = "TruexGoogleReferenceApp.app"
+            BlueprintName = "TruexGoogleReferenceApp"
+            ReferencedContainer = "container:TruexGoogleReferenceApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4039DD012227587F003FF448"
-            BuildableName = "DFP Integration Demo.app"
-            BlueprintName = "DFP Integration Demo"
-            ReferencedContainer = "container:DFP Integration Demo.xcodeproj">
+            BuildableName = "TruexGoogleReferenceApp.app"
+            BlueprintName = "TruexGoogleReferenceApp"
+            ReferencedContainer = "container:TruexGoogleReferenceApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4039DD012227587F003FF448"
-            BuildableName = "DFP Integration Demo.app"
-            BlueprintName = "DFP Integration Demo"
-            ReferencedContainer = "container:DFP Integration Demo.xcodeproj">
+            BuildableName = "TruexGoogleReferenceApp.app"
+            BlueprintName = "TruexGoogleReferenceApp"
+            ReferencedContainer = "container:TruexGoogleReferenceApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
