@@ -32,6 +32,8 @@ class PlayerViewController: UIViewController,
     // [1]
     // We keep track of which ad break we're in so we know how far to seek when skipping it.
     private var currentAdBreak: IMAAdBreakInfo?
+    private var currentTrueXAd: IMAAd?
+    private var timeRangesToSkip: [CMTimeRange] = []
     
     // MARK: [OPTIONAL]
     // Variables used to display a loading screen
@@ -94,6 +96,7 @@ class PlayerViewController: UIViewController,
             return
         }
         
+        currentTrueXAd = ad
         // [3]
         // The companion ad contains a URL (the "static resource URL") which tells us where to go to get the
         // ad parameters for our Engagement.
@@ -116,15 +119,15 @@ class PlayerViewController: UIViewController,
         // We pause the underlying stream in order to present the true[X] experience and seek over the current ad,
         // which is just a placeholder for the true[X] ad.
         player.pause()
-        let seekTime = player.currentTime() + CMTimeMakeWithSeconds(ad?.duration ?? 0, preferredTimescale: 1000)
+        let seekTime = player.currentTime() + CMTime(seconds: ad?.duration ?? 0, preferredTimescale: 1000)
         player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
         // Slot type constants are defined in TruexConstants.h
         let slotType = currentAdBreak?.adBreakIndex == 0 ? PREROLL : MIDROLL
         
         // [5]
         adRenderer = TruexAdRenderer(url: "https://media.truex.com/placeholder.js",
-                              adParameters: jsonDict as! [String: String],
-                              slotType: slotType)
+                                     adParameters:jsonDict as! [String: String],
+                                     slotType: slotType)
         adRenderer?.delegate = self
     }
     
@@ -167,16 +170,17 @@ class PlayerViewController: UIViewController,
     // by seeking now, we can have the play head at the right place when the viewer is ready.
     func onAdFreePod() {
         if let adBreak = currentAdBreak {
-            let seekTime = CMTimeMakeWithSeconds(adBreak.timeOffset + adBreak.duration,
-                                                 preferredTimescale: 1000)
+            let seekTime = CMTime(seconds: adBreak.timeOffset + adBreak.duration,
+                                  preferredTimescale: 1000)
             player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
         }
     }
 
     // The next three methods are all invoked when the engagement has, for whatever reason, stopped running. In all of these
-    // cases, we can just resume playback of the player. If the viewer has earned their true[ATTENTION] credit, then they will
+    // cases, we resume playback of the player. If the viewer has earned their true[ATTENTION] credit, then they will
     // already be seeked past the ad pod, so they will se content. If not, then the playhead will still be at the beginning
     // of the ad pod, so on resume, the viewer will see the ads.
+    // If there the true[X] renderer did not receive an ad, we record the time range of the placeholder ad to skip over it if needed
     func onAdCompleted(_ timeSpent: Int) {
         // [7]
         player.play()
@@ -184,11 +188,20 @@ class PlayerViewController: UIViewController,
     
     func onAdError(_ errorMessage: String?) {
         // [7]
-        player.play()
+        seekAfterTrueXInvalidAndPlay()
     }
     
     func onNoAdsAvailable() {
         // [7]
+        seekAfterTrueXInvalidAndPlay()
+    }
+    
+    private func seekAfterTrueXInvalidAndPlay() {
+        if let currentAd = currentTrueXAd, let currentBreak = currentAdBreak {
+            // Remember this time range so we can skip over while restricting seeking over ads
+            timeRangesToSkip.append(CMTimeRangeMake(start: CMTime(seconds: currentBreak.timeOffset, preferredTimescale: 1000),
+                                                    duration: CMTime(seconds: currentAd.duration, preferredTimescale: 1000)))
+        }
         player.play()
     }
     
@@ -216,11 +229,29 @@ class PlayerViewController: UIViewController,
         let targetTimeSeconds = CMTimeGetSeconds(targetTime)
         let prevCuepoint = self.streamManager.previousCuepoint(forStreamTime: targetTimeSeconds)
         // Ensure the viewer cannot seek past an unplayed ad
-        if let prevCuepoint = prevCuepoint, !prevCuepoint.isPlayed {
-            self.userSeekTime = targetTime;
-            return CMTimeMakeWithSeconds(prevCuepoint.startTime, preferredTimescale: 1000)
+        if let prevCuepoint = prevCuepoint, isInvalidSeekFromAdBreak(prevCuepoint, oldTime: oldTime) {
+            self.userSeekTime = targetTime
+            return getFirstVideoAdStartTime(prevCuepoint)
         }
         return targetTime
+    }
+
+    private func isInvalidSeekFromAdBreak(_ cuePoint: IMACuepoint, oldTime: CMTime) -> Bool {
+        // Old time may report incorrectly from within ad break because we resume playback after the true[X] renderer has exited
+        // A seek time within the ad break means the seek was started before the ad break
+        return !cuePoint.isPlayed ||
+                oldTime.seconds < cuePoint.startTime ||
+                (oldTime.seconds > cuePoint.startTime && oldTime.seconds < cuePoint.endTime);
+    }
+    
+    private func getFirstVideoAdStartTime(_ cuePoint: IMACuepoint) -> CMTime {
+        let adBreakStartTime = CMTime(seconds: cuePoint.startTime, preferredTimescale: 1000)
+        for skippableTruexPlaceholders in timeRangesToSkip {
+            if skippableTruexPlaceholders.containsTime(adBreakStartTime) {
+                return skippableTruexPlaceholders.end
+            }
+        }
+        return adBreakStartTime
     }
     
     // MARK: - NS Object Overrides
