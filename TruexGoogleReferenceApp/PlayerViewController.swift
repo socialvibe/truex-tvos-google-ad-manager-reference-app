@@ -207,11 +207,12 @@ class PlayerViewController: UIViewController,
     
     // This is invoked when the user presses the menu button on the TV remote while the renderer is still showing the
     // engagement choice card. In that case, we assume the user wants to cancel the whole stream, not just the true[X]
-    // experience, so we dismiss the view controller, exiting the app. Of course, in a real media app, this would instead
-    // go back to the episode list view, or whatever is appropriate.
+    // experience. We dismiss the view controller, returning to the stream selection screen
     func onUserCancelStream() {
         // [8]
-        dismiss(animated: true)
+        playerViewController.dismiss(animated: false, completion: {
+            self.performSegue(withIdentifier: "ReturnToStreamSelect", sender: self)
+        })
     }
     
     // Finally, this method is invoked after the renderer has finished initialization, and since we always initialize the
@@ -252,6 +253,10 @@ class PlayerViewController: UIViewController,
             }
         }
         return adBreakStartTime
+    }
+    
+    func playerViewControllerDidEndDismissalTransition(_ playerViewController: AVPlayerViewController) {
+        performSegue(withIdentifier: "ReturnToStreamSelect", sender: self)
     }
     
     // MARK: - NS Object Overrides

@@ -24,9 +24,14 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="wu6-TO-1qx"/>
                     </view>
+                    <connections>
+                        <segue destination="su3-o3-bqJ" kind="unwind" identifier="ReturnToStreamSelect" unwindAction="unwindToHomeWithSegue:" id="kBe-Aq-S92"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="su3-o3-bqJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
+            <point key="canvasLocation" x="18" y="69"/>
         </scene>
         <!--HomeViewController-->
         <scene sceneID="WqV-3B-o8o">
@@ -71,7 +76,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" animates="NO" id="uKz-Dv-rsI"/>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" id="uKz-Dv-rsI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -95,7 +100,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" animates="NO" id="tbk-s1-TdP"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" id="tbk-s1-TdP"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PlayButton" translatesAutoresizingMaskIntoConstraints="NO" id="M6q-8d-lwJ">
@@ -113,6 +118,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fEh-M0-7bc"/>
                     </view>
+                    <navigationItem key="navigationItem" id="3M9-Hq-b0q"/>
                     <connections>
                         <outlet property="collectionView" destination="zsC-aa-iFY" id="KCr-DF-Xun"/>
                         <outlet property="streamDescription" destination="xgo-cm-Ggi" id="yOH-hg-XGL"/>
@@ -129,6 +135,6 @@
         <image name="PlayButton" width="51" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tbk-s1-TdP"/>
+        <segue reference="uKz-Dv-rsI"/>
     </inferredMetricsTieBreakers>
 </document>

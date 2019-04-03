@@ -61,6 +61,7 @@ class HomeViewController: UIViewController,
             playerViewController.setStream(contentSourceID: focusedStream.googleContentID,
                                            videoID: focusedStream.googleVideoID)
             setScreenshotAsLoadingScreen(for: playerViewController)
+            playerLayer?.player?.pause()
         }
     }
  
@@ -116,6 +117,8 @@ class HomeViewController: UIViewController,
         setupLoopingPreview(videoURLString: configuration.preview)
     }
     
+    @IBAction func unwindToHome(segue: UIStoryboardSegue) {}
+    
     private func indexOfSelectedStream() -> Int {
         if let streamConfigurations = streamConfigurations, let focusedStream = focusedStream {
             return streamConfigurations.firstIndex(where: { $0 == focusedStream }) ?? 0
@@ -131,6 +134,7 @@ class HomeViewController: UIViewController,
             playerLooper = AVPlayerLooper(player: player,
                                           templateItem: playerItem)
             playerLayer?.player = player
+            player.volume = 0
             player.play()
         }
     }
