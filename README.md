@@ -5,6 +5,8 @@ ad renderer with the Google Ad Manager IMA SDK in tvOS. This document will step 
 various pieces of code that make the integration work, so that the same basic ideas can
 be replicated in a real production app.
 
+This reference app covers the essential work. For a more detailed integration guide, please refer to: https://github.com/socialvibe/truex-tvos-integrations.
+
 # Assumptions
 
 We assume you have either already integrated the IMA SDK with your app, or you are

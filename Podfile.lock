@@ -94,12 +94,12 @@ SPEC REPOS:
     - Starscream
     - SWXMLHash
     - TaskQueue
+  https://github.com/Innovid/cocoapods-spec.git:
+    - InnovidAdRenderer
   https://github.com/socialvibe/cocoapod-specs.git:
     - TruexAdRenderer
   https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git:
     - YouiTVAdRenderer
-  "https://innovid-cocoapods:3bbe7445d58951a8f89c5e54c0ebfdd17039589e@github.com/Innovid/cocoapods-spec.git":
-    - InnovidAdRenderer
 
 EXTERNAL SOURCES:
   IMA:
@@ -129,6 +129,6 @@ SPEC CHECKSUMS:
   TruexAdRenderer: 0e71707e172d0273f363eb2806b28f45970a3873
   YouiTVAdRenderer: cce73614e764d16fe4dc4b1954d64fc789507231
 
-PODFILE CHECKSUM: ed2f895ebc415a19159df5724f63c5b3ab2d1574
+PODFILE CHECKSUM: 5d46ba659e4a4794ac90859791cabca7ab660cad
 
 COCOAPODS: 1.5.3
