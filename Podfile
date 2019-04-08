@@ -4,7 +4,7 @@ platform :tvos, '10.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/socialvibe/cocoapod-specs.git'
-source 'https://innovid-cocoapods:3bbe7445d58951a8f89c5e54c0ebfdd17039589e@github.com/Innovid/cocoapods-spec.git'
+source 'https://github.com/Innovid/cocoapods-spec.git'
 source 'https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git'
 
 target 'TruexGoogleReferenceApp' do
