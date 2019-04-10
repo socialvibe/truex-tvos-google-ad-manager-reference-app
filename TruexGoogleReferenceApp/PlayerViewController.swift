@@ -45,6 +45,8 @@ class PlayerViewController: UIViewController,
     // To save the viewer's seek time if a seek is interrupted by an ad break
     private var userSeekTime: CMTime?
 
+    // To show when the ad breaks are in the player progress bar
+    private var adCuepoints: [IMACuepoint] = []
     
     // MARK: - View Controller Overrides
     // MARK: [REQUIRED]
@@ -151,6 +153,16 @@ class PlayerViewController: UIViewController,
         /* [OPTIONAL] */ seekToUserTime()
     }
     
+    // MARK: [OPTIONAL]
+    func streamManager(_ streamManager: IMAStreamManager!, didUpdate cuepoints: [IMACuepoint]!) {
+        adCuepoints.removeAll()
+        adCuepoints.append(contentsOf: cuepoints)
+    }
+
+    func streamManagerIsReady(forPlayback streamManager: IMAStreamManager!) {
+        showAdTimesInAVPlayer()
+    }
+
     // MARK: - true[X] Ad Renderer Delegate Methods
     // MARK: [REQUIRED]
     
@@ -199,8 +211,7 @@ class PlayerViewController: UIViewController,
     private func seekAfterTrueXInvalidAndPlay() {
         if let currentAd = currentTrueXAd, let currentBreak = currentAdBreak {
             // Remember this time range so we can skip over while restricting seeking over ads
-            timeRangesToSkip.append(CMTimeRangeMake(start: CMTime(seconds: currentBreak.timeOffset, preferredTimescale: 1000),
-                                                    duration: CMTime(seconds: currentAd.duration, preferredTimescale: 1000)))
+            timeRangesToSkip.append(timeRangeFrom(start: currentBreak.timeOffset, duration: currentAd.duration))
         }
         player.play()
     }
@@ -340,5 +351,27 @@ class PlayerViewController: UIViewController,
                            forKeyPath: #keyPath(AVPlayerItem.status),
                            options: [.new, .old],
                            context: &playerItemContext)
+    }
+
+    private func interstitialRangesFromCuepoints(_ cuepoints: [IMACuepoint]) -> [AVInterstitialTimeRange] {
+        var ranges: [AVInterstitialTimeRange] = []
+        for cuepoint in cuepoints {
+            ranges.append(
+                AVInterstitialTimeRange(timeRange: timeRangeFrom(start: cuepoint.startTime,
+                                                                 duration: cuepoint.endTime - cuepoint.startTime))
+            );
+        }
+        return ranges
+    }
+
+    private func timeRangeFrom(start: TimeInterval, duration: TimeInterval) -> CMTimeRange {
+        return CMTimeRange(start: CMTimeMakeWithSeconds(start, preferredTimescale: 1000),
+                           duration: CMTimeMakeWithSeconds(duration, preferredTimescale: 1000))
+    }
+
+    private func showAdTimesInAVPlayer() {
+        if adCuepoints.count > 0 {
+            player.currentItem?.interstitialTimeRanges = interstitialRangesFromCuepoints(adCuepoints)
+        }
     }
 }
