@@ -69,12 +69,12 @@ class PlayerViewController: UIViewController,
     
     private func listenForApplicationEvents() {
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.applicationDidEnterBackground),
-                                               name: UIApplication.didEnterBackgroundNotification,
+                                               selector: #selector(self.willResignActiveNotification),
+                                               name: UIApplication.willResignActiveNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.applicationWillEnterForeground),
-                                               name: UIApplication.willEnterForegroundNotification,
+                                               selector: #selector(self.didBecomeActiveNotification),
+                                               name: UIApplication.didBecomeActiveNotification,
                                                object: nil)
     }
 
@@ -93,11 +93,11 @@ class PlayerViewController: UIViewController,
     
     // MARK: - UIApplicationDelegate Methods
     // MARK: [REQUIRED]
-    @objc func applicationDidEnterBackground(_ application: UIApplication) {
+    @objc func willResignActiveNotification(_ application: UIApplication) {
         adRenderer?.pause()
     }
 
-    @objc func applicationWillEnterForeground(_ application: UIApplication) {
+    @objc func didBecomeActiveNotification(_ application: UIApplication) {
         adRenderer?.resume()
     }
 
