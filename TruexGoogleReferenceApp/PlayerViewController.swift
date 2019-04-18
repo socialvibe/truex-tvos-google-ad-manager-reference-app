@@ -63,9 +63,21 @@ class PlayerViewController: UIViewController,
         streamManager.delegate = self
         playerViewController.delegate = self
 
+        listenForApplicationEvents()
         /* [OPTIONAL] */ listenForPlayerStatus()
     }
     
+    private func listenForApplicationEvents() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.willResignActiveNotification),
+                                               name: UIApplication.willResignActiveNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.didBecomeActiveNotification),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -79,6 +91,16 @@ class PlayerViewController: UIViewController,
         present(playerViewController, animated: false)
     }
     
+    // MARK: - UIApplicationDelegate Methods
+    // MARK: [REQUIRED]
+    @objc func willResignActiveNotification(_ application: UIApplication) {
+        adRenderer?.pause()
+    }
+
+    @objc func didBecomeActiveNotification(_ application: UIApplication) {
+        adRenderer?.resume()
+    }
+
     // MARK: - IMA Stream Manager Delegate Methods
     // MARK: [REQUIRED]
     func streamManager(_ streamManager: IMAStreamManager?, adBreakDidStart adBreakInfo: IMAAdBreakInfo?) {
@@ -195,16 +217,19 @@ class PlayerViewController: UIViewController,
     // If there the true[X] renderer did not receive an ad, we record the time range of the placeholder ad to skip over it if needed
     func onAdCompleted(_ timeSpent: Int) {
         // [7]
+        adRenderer = nil
         player.play()
     }
     
     func onAdError(_ errorMessage: String?) {
         // [7]
+        adRenderer = nil
         seekAfterTrueXInvalidAndPlay()
     }
     
     func onNoAdsAvailable() {
         // [7]
+        adRenderer = nil
         seekAfterTrueXInvalidAndPlay()
     }
     
