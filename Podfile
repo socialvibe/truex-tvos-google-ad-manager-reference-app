@@ -1,4 +1,4 @@
-SWIFT_VERSION = '3.2'
+SWIFT_VERSION = '4.0'
 
 platform :tvos, '10.0'
 
@@ -9,7 +9,7 @@ source 'https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git'
 
 target 'TruexGoogleReferenceApp' do
     use_frameworks!
-    pod 'TruexAdRenderer', '~> 3.6'
+    pod 'TruexAdRenderer', '~> 3.7'
     pod 'IMA', :path => './IMA'
 end
 
