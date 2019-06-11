@@ -39,5 +39,19 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Automatic</string>
+    <key>Fabric</key>
+    <dict>
+        <key>APIKey</key>
+        <string>b59058b18fe58469a4d34031fd9cc958fa15e4fd</string>
+        <key>Kits</key>
+        <array>
+            <dict>
+                <key>KitInfo</key>
+                <dict/>
+                <key>KitName</key>
+                <string>Crashlytics</string>
+            </dict>
+        </array>
+    </dict>
 </dict>
 </plist>

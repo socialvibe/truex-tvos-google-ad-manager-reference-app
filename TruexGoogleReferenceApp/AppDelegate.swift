@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
+import TruexAdRenderer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    private static let BuildType = "Build Type"
+    private static let Debug = "Debug"
+    private static let Release = "Release"
+    private static let UserId = "User Id"
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        initializeCrashlytics()
         return true
     }
 
@@ -40,5 +47,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func initializeCrashlytics() {
+        Fabric.with([Crashlytics.self])
 
+        #if DEBUG
+        Crashlytics.sharedInstance().setObjectValue(AppDelegate.Debug, forKey: AppDelegate.BuildType)
+        #else
+        Crashlytics.sharedInstance().setObjectValue(AppDelegate.Release, forKey: AppDelegate.BuildType)
+        #endif
+
+        Crashlytics.sharedInstance().setObjectValue(TruexAdRenderer.getUserId(), forKey: AppDelegate.UserId)
+    }
 }

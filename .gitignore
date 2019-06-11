@@ -4,3 +4,4 @@ Pods
 .idea
 xcuserdata/
 build/
+.DS_Store

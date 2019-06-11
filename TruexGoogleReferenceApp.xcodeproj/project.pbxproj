@@ -107,6 +107,7 @@
 				4039DD002227587F003FF448 /* Resources */,
 				F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */,
 				08E437E7E4D9D459A2D116E9 /* [CP] Copy Pods Resources */,
+				B693FC8B22B025A300BA0D79 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -173,16 +174,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TruexAdRenderer/Truex.bundle",
 				"${PODS_ROOT}/YouiTVAdRenderer/YouiTVAdRenderer/YouiTVAdRenderer.framework/assets",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Truex.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/assets",
@@ -197,15 +194,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-TruexGoogleReferenceApp-checkManifestLockResult.txt",
 			);
@@ -214,12 +207,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */ = {
+		B693FC8B22B025A300BA0D79 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" b59058b18fe58469a4d34031fd9cc958fa15e4fd 87b71b63e9e68540fac527db5752e7478fb674711d19cde5a3a65aaa28ba47ba\n";
+		};
+		F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-frameworks.sh",
@@ -239,13 +248,11 @@
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/TVOS360Video/TVOS360Video.framework",
 				"${BUILT_PRODUCTS_DIR}/TaskQueue/TaskQueue.framework",
-				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.7.0/TruexAdRenderer.framework",
-				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.7.0/TruexAdRenderer.framework.dSYM",
+				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.7.3/TruexAdRenderer.framework",
+				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.7.3/TruexAdRenderer.framework.dSYM",
 				"${PODS_ROOT}/YouiTVAdRenderer/YouiTVAdRenderer/YouiTVAdRenderer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InteractiveMediaAds.framework",
@@ -422,6 +429,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Launch Image";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 746G57X93G;
 				INFOPLIST_FILE = TruexGoogleReferenceApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

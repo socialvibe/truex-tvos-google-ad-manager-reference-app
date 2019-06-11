@@ -11,6 +11,10 @@ target 'TruexGoogleReferenceApp' do
     use_frameworks!
     pod 'TruexAdRenderer', '~> 3.7'
     pod 'IMA', :path => './IMA'
+
+    # Pods for Crashlytics
+    pod 'Fabric', '~> 1.10.1'
+    pod 'Crashlytics', '~> 3.13.1'
 end
 
 post_install do |installer|
