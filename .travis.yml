@@ -1,13 +1,24 @@
 language: swift
 
-osx_image: xcode10.1
-
 cache:
     - bundler
     - cocoapods
 
 before_install:
+    - rm -f Podfile.lock
     - pod update
 
-script:
-    -  xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
+jobs:
+  include:
+    - stage: "Build"
+      name: "Xcode Build (Xcode 10.1)"
+      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
+      osx_image: xcode10.1
+    - stage: "Build"
+      name: "Xcode Build (Xcode 10.2)"
+      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
+      osx_image: xcode10.2
+    - stage: "Build"
+      name: "Xcode Build (Xcode 11.0)"
+      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
+      osx_image: xcode11

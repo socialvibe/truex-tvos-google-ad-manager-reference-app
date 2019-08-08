@@ -1,134 +1,43 @@
 PODS:
-  - Alamofire (4.8.1)
-  - CryptoSwift (0.9.0)
   - IMA (1.0)
-  - InnovidAdRenderer (1.3.12):
-    - Kingfisher (~> 3.13.0)
-    - Moya (~> 8.0.0)
-    - SWXMLHash (~> 4.2.3)
-  - JSONModel (1.3.0)
-  - Kingfisher (3.13.1)
-  - Moya (8.0.5):
-    - Moya/Core (= 8.0.5)
-  - Moya/Core (8.0.5):
-    - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - OptimizelySDKCore (1.1.9):
-    - OptimizelySDKCore/JSONModel (= 1.1.9)
-  - OptimizelySDKCore/JSONModel (1.1.9):
-    - JSONModel (= 1.3.0)
-  - OptimizelySDKDatafileManager (1.1.9):
-    - OptimizelySDKDatafileManager/JSONModel (= 1.1.9)
-    - OptimizelySDKShared (= 1.1.9)
-  - OptimizelySDKDatafileManager/JSONModel (1.1.9):
-    - JSONModel (= 1.3.0)
-    - OptimizelySDKShared (= 1.1.9)
-  - OptimizelySDKEventDispatcher (1.1.9):
-    - OptimizelySDKEventDispatcher/JSONModel (= 1.1.9)
-    - OptimizelySDKShared (= 1.1.9)
-  - OptimizelySDKEventDispatcher/JSONModel (1.1.9):
-    - JSONModel (= 1.3.0)
-    - OptimizelySDKShared (= 1.1.9)
-  - OptimizelySDKShared (1.1.9):
-    - FMDB (= 2.6.2)
-    - JSONModel (= 1.3.0)
-    - OptimizelySDKCore (= 1.1.9)
-  - OptimizelySDKTVOS (1.1.9):
-    - OptimizelySDKDatafileManager (= 1.1.9)
-    - OptimizelySDKEventDispatcher (= 1.1.9)
-    - OptimizelySDKTVOS/JSONModel (= 1.1.9)
-    - OptimizelySDKUserProfile (= 1.1.9)
-  - OptimizelySDKTVOS/JSONModel (1.1.9):
-    - JSONModel (= 1.3.0)
-    - OptimizelySDKDatafileManager (= 1.1.9)
-    - OptimizelySDKEventDispatcher (= 1.1.9)
-    - OptimizelySDKUserProfile (= 1.1.9)
-  - OptimizelySDKUserProfile (1.1.9):
-    - OptimizelySDKShared (= 1.1.9)
-    - OptimizelySDKUserProfile/JSONModel (= 1.1.9)
-  - OptimizelySDKUserProfile/JSONModel (1.1.9):
-    - JSONModel (= 1.3.0)
-    - OptimizelySDKShared (= 1.1.9)
-  - PusherSwift (6.1.0):
-    - CryptoSwift (~> 0.9.0)
-    - ReachabilitySwift (~> 4.1.0)
-    - Starscream (~> 3.0.5)
-    - TaskQueue (~> 1.1.1)
-  - ReachabilitySwift (4.1.0)
-  - Result (3.2.4)
+  - InnovidAdRenderer_xcode10_2 (1.5.6)
+  - PusherSwift (5.1.1)
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
-  - Starscream (3.0.6)
-  - SWXMLHash (4.2.5)
-  - TaskQueue (1.1.1)
-  - TruexAdRenderer (3.6.2):
-    - InnovidAdRenderer (= 1.3.12)
-    - OptimizelySDKTVOS (= 1.1.9)
-    - PusherSwift (<= 6.1, >= 5.1)
+  - TruexAdRenderer (3.8.0):
+    - InnovidAdRenderer_xcode10_2 (~> 1.5)
+    - PusherSwift (~> 5.0)
     - SDWebImage (~> 4.2.3)
-    - YouiTVAdRenderer (~> 1.1.1)
-  - YouiTVAdRenderer (1.1.1)
+    - TVOS360Video (= 1.1.3)
+  - TVOS360Video (1.1.3)
 
 DEPENDENCIES:
   - IMA (from `./IMA`)
-  - TruexAdRenderer (~> 3.6)
+  - TruexAdRenderer (= 3.8.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
-    - CryptoSwift
-    - JSONModel
-    - Kingfisher
-    - Moya
-    - OptimizelySDKCore
-    - OptimizelySDKDatafileManager
-    - OptimizelySDKEventDispatcher
-    - OptimizelySDKShared
-    - OptimizelySDKTVOS
-    - OptimizelySDKUserProfile
     - PusherSwift
-    - ReachabilitySwift
-    - Result
     - SDWebImage
-    - Starscream
-    - SWXMLHash
-    - TaskQueue
   https://github.com/Innovid/cocoapods-spec.git:
-    - InnovidAdRenderer
+    - InnovidAdRenderer_xcode10_2
   https://github.com/socialvibe/cocoapod-specs.git:
     - TruexAdRenderer
-  https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git:
-    - YouiTVAdRenderer
+    - TVOS360Video
 
 EXTERNAL SOURCES:
   IMA:
     :path: "./IMA"
 
 SPEC CHECKSUMS:
-  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
-  CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
   IMA: 8b21ed38de5ee9290b5513ac17d829e1527b599d
-  InnovidAdRenderer: b3590275e0d683463ee7ea19840959acee314df5
-  JSONModel: 81c06ecf99190a25fa6aafceea5faffa7880868a
-  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
-  Moya: c37eec09a098ba9991b5a963b291fc5704bdb9ef
-  OptimizelySDKCore: 4a6c2edca90e04e639b0108ef21601e08c40cfa6
-  OptimizelySDKDatafileManager: b66020b42dcca954a4ec2551c7f6a73ca7035823
-  OptimizelySDKEventDispatcher: f0ebefa16a6a5834fed562ab427db5fd4ebc5a6f
-  OptimizelySDKShared: 2c981d2d88cc79296a314293f770fa5032f8bff8
-  OptimizelySDKTVOS: 804ac830a4171ffd2949394bdd276d318f4399f7
-  OptimizelySDKUserProfile: 20027486f6549934c479fd4b704c5c1195c8355b
-  PusherSwift: 6f2535d616cf0d6867a58bee501999995ad37999
-  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  InnovidAdRenderer_xcode10_2: 4ba20cf96342d214bf3ad2129e355845c0cdfb36
+  PusherSwift: de9238b6b9faec5275d452e5f43ce9c82b78731e
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
-  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  SWXMLHash: eb16013c6f654853980822e0a778c9d66e017dde
-  TaskQueue: 53a3cdaf817d9ce3cd50837ff6610aeb7b968997
-  TruexAdRenderer: 0e71707e172d0273f363eb2806b28f45970a3873
-  YouiTVAdRenderer: cce73614e764d16fe4dc4b1954d64fc789507231
+  TruexAdRenderer: e5e8eb2f7664ff9771c15fb65fad292552921e38
+  TVOS360Video: cb48b398a70e71e8335e859d3715f847e184621c
 
-PODFILE CHECKSUM: 5d46ba659e4a4794ac90859791cabca7ab660cad
+PODFILE CHECKSUM: 4ef6b2db0a194395c616f3beb788c6bd4f800f6d
 
 COCOAPODS: 1.5.3
