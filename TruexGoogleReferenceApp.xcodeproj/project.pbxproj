@@ -106,7 +106,6 @@
 				4039DCFF2227587F003FF448 /* Frameworks */,
 				4039DD002227587F003FF448 /* Resources */,
 				F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */,
-				08E437E7E4D9D459A2D116E9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -168,28 +167,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08E437E7E4D9D459A2D116E9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/TruexAdRenderer/Truex.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Truex.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A5231216010398AE03362BF0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,8 +204,7 @@
 				"${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/TVOS360Video/TVOS360Video.framework",
-				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.8.0/TruexAdRenderer.framework",
-				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.8.0/TruexAdRenderer.framework.dSYM",
+				"${BUILT_PRODUCTS_DIR}/TruexAdRendererSource/TruexAdRenderer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -241,7 +217,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TVOS360Video.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TruexAdRenderer.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/TruexAdRenderer.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

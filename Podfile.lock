@@ -5,7 +5,7 @@ PODS:
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
-  - TruexAdRenderer (3.8.0):
+  - TruexAdRendererSource (3.8.1):
     - InnovidAdRenderer_xcode10_2 (~> 1.5)
     - PusherSwift (~> 5.0)
     - SDWebImage (~> 4.2.3)
@@ -14,7 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - IMA (from `./IMA`)
-  - TruexAdRenderer (= 3.8.0)
+  - TruexAdRendererSource (from `../TruexAdRenderer-tvOS`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -23,21 +23,22 @@ SPEC REPOS:
   https://github.com/Innovid/cocoapods-spec.git:
     - InnovidAdRenderer_xcode10_2
   https://github.com/socialvibe/cocoapod-specs.git:
-    - TruexAdRenderer
     - TVOS360Video
 
 EXTERNAL SOURCES:
   IMA:
     :path: "./IMA"
+  TruexAdRendererSource:
+    :path: "../TruexAdRenderer-tvOS"
 
 SPEC CHECKSUMS:
   IMA: 8b21ed38de5ee9290b5513ac17d829e1527b599d
   InnovidAdRenderer_xcode10_2: 4ba20cf96342d214bf3ad2129e355845c0cdfb36
   PusherSwift: de9238b6b9faec5275d452e5f43ce9c82b78731e
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
-  TruexAdRenderer: e5e8eb2f7664ff9771c15fb65fad292552921e38
+  TruexAdRendererSource: 1431b67caf338c05538af798a583e9096ee59e5f
   TVOS360Video: cb48b398a70e71e8335e859d3715f847e184621c
 
-PODFILE CHECKSUM: 4ef6b2db0a194395c616f3beb788c6bd4f800f6d
+PODFILE CHECKSUM: b9f8e3f424120b56671b60ede47b5b0b7d38aee9
 
 COCOAPODS: 1.5.3
