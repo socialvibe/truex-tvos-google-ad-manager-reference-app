@@ -9,7 +9,7 @@ source 'https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git'
 
 target 'TruexGoogleReferenceApp' do
     use_frameworks!
-    pod 'TruexAdRenderer', '3.8.1'
+    pod 'TruexAdRendererSource', :path => "../TruexAdRenderer-tvOS"
     pod 'IMA', :path => './IMA'
 end
 
