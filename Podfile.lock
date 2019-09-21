@@ -1,44 +1,55 @@
 PODS:
+  - CryptoSwift (0.15.0)
   - IMA (1.0)
-  - InnovidAdRenderer_xcode10_2 (1.5.6)
-  - PusherSwift (5.1.1)
+  - InnovidAdRenderer_xcode11_0 (1.5.13)
+  - PusherSwift (7.0.0):
+    - CryptoSwift (~> 0.9)
+    - ReachabilitySwift (= 4.3.0)
+    - Starscream (~> 3.0.5)
+  - ReachabilitySwift (4.3.0)
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
-  - TruexAdRendererSource (3.8.2):
-    - InnovidAdRenderer_xcode10_2 (~> 1.5)
-    - PusherSwift (~> 5.0)
+  - Starscream (3.0.6)
+  - TruexAdRenderer (3.8.2):
+    - InnovidAdRenderer_xcode11_0 (~> 1.5.12)
+    - PusherSwift (~> 7.0)
     - SDWebImage (~> 4.2.3)
     - TVOS360Video (= 1.1.3)
   - TVOS360Video (1.1.3)
 
 DEPENDENCIES:
   - IMA (from `./IMA`)
-  - TruexAdRendererSource (from `../TruexAdRenderer-tvOS`)
+  - TruexAdRenderer (= 3.8.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - CryptoSwift
     - PusherSwift
+    - ReachabilitySwift
     - SDWebImage
+    - Starscream
   https://github.com/Innovid/cocoapods-spec.git:
-    - InnovidAdRenderer_xcode10_2
+    - InnovidAdRenderer_xcode11_0
   https://github.com/socialvibe/cocoapod-specs.git:
+    - TruexAdRenderer
     - TVOS360Video
 
 EXTERNAL SOURCES:
   IMA:
     :path: "./IMA"
-  TruexAdRendererSource:
-    :path: "../TruexAdRenderer-tvOS"
 
 SPEC CHECKSUMS:
+  CryptoSwift: 769f58a9e89f64e8796c2e59ce5f002dc81a2438
   IMA: 8b21ed38de5ee9290b5513ac17d829e1527b599d
-  InnovidAdRenderer_xcode10_2: 4ba20cf96342d214bf3ad2129e355845c0cdfb36
-  PusherSwift: de9238b6b9faec5275d452e5f43ce9c82b78731e
+  InnovidAdRenderer_xcode11_0: 3a22486564ca05911402f00287df51a8d4eda1b3
+  PusherSwift: d15d6290be0b0b57fd9ac80b03661a6ba24623ec
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
-  TruexAdRendererSource: 71bb8dd5ab026f954aa0d076800b8ea818b2f3e4
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
+  TruexAdRenderer: 1b0defd4f6e8e42a5f6529fbad2e6862a0f55c62
   TVOS360Video: cb48b398a70e71e8335e859d3715f847e184621c
 
-PODFILE CHECKSUM: b9f8e3f424120b56671b60ede47b5b0b7d38aee9
+PODFILE CHECKSUM: 70ab3aa1e61657e5ef866fe39c36f858b5a66c41
 
 COCOAPODS: 1.5.3

@@ -106,6 +106,7 @@
 				4039DCFF2227587F003FF448 /* Frameworks */,
 				4039DD002227587F003FF448 /* Resources */,
 				F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */,
+				DA0B7951D24F9922F0D402D4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,6 +190,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DA0B7951D24F9922F0D402D4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TruexAdRenderer/Truex.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Truex.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F55749B8C84568E4C272A26E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,25 +221,33 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${PODS_ROOT}/../IMA/InteractiveMediaAds.framework",
-				"${PODS_ROOT}/InnovidAdRenderer_xcode10_2/InnovidAdRenderer.framework",
-				"${PODS_ROOT}/InnovidAdRenderer_xcode10_2/InnovidAdRenderer.framework.dSYM",
+				"${PODS_ROOT}/InnovidAdRenderer_xcode11_0/InnovidAdRenderer.framework",
+				"${PODS_ROOT}/InnovidAdRenderer_xcode11_0/InnovidAdRenderer.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/TVOS360Video/TVOS360Video.framework",
-				"${BUILT_PRODUCTS_DIR}/TruexAdRendererSource/TruexAdRenderer.framework",
+				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.8.2/TruexAdRenderer.framework",
+				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.8.2/TruexAdRenderer.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InteractiveMediaAds.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InnovidAdRenderer.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/InnovidAdRenderer.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PusherSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TVOS360Video.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TruexAdRenderer.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/TruexAdRenderer.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
