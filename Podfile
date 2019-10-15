@@ -2,14 +2,23 @@ SWIFT_VERSION = '4.0'
 
 platform :tvos, '10.0'
 
-source 'https://github.com/CocoaPods/Specs.git'
+# Decide which CocoaPods public spec repo to use
+COCOAPODS_VERSION_MAJOR=%x( pod --version | cut -d'.' -f1 ).to_i unless defined? COCOAPODS_VERSION_MAJOR
+COCOAPODS_VERSION_MINOR=%x( pod --version | cut -d'.' -f2 ).to_i unless defined? COCOAPODS_VERSION_MINOR
+if((COCOAPODS_VERSION_MAJOR >= 1 && COCOAPODS_VERSION_MINOR >= 8) || COCOAPODS_VERSION_MAJOR >= 2)
+  # As of CocoaPods 1.8.0, the CDN link is the default public spec repo
+  source 'https://cdn.cocoapods.org'
+else
+  source 'https://github.com/CocoaPods/Specs.git'
+end
+
 source 'https://github.com/socialvibe/cocoapod-specs.git'
 source 'https://github.com/Innovid/cocoapods-spec.git'
 source 'https://github.com/YOU-i-Labs/YouiTVAdRenderer-CocoaPod.git'
 
 target 'TruexGoogleReferenceApp' do
     use_frameworks!
-    pod 'TruexAdRenderer', '3.8.1'
+    pod 'TruexAdRenderer', '3.8.2'
     pod 'IMA', :path => './IMA'
 end
 
