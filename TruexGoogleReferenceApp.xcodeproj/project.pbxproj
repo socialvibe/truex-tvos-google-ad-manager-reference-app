@@ -222,23 +222,23 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TruexGoogleReferenceApp/Pods-TruexGoogleReferenceApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${PODS_ROOT}/../IMA/InteractiveMediaAds.framework",
-				"${PODS_ROOT}/InnovidAdRenderer_xcode11_0/InnovidAdRenderer.framework",
-				"${PODS_ROOT}/InnovidAdRenderer_xcode11_0/InnovidAdRenderer.framework.dSYM",
+				"${PODS_ROOT}/GoogleAds-IMA-tvOS-SDK/GoogleInteractiveMediaAds.framework",
+				"${PODS_ROOT}/InnovidAdRenderer_xcode11.3.0/InnovidAdRenderer.framework",
+				"${PODS_ROOT}/InnovidAdRenderer_xcode11.3.0/InnovidAdRenderer.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/TVOS360Video/TVOS360Video.framework",
-				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.8.2/TruexAdRenderer.framework",
-				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.8.2/TruexAdRenderer.framework.dSYM",
+				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.9.3/TruexAdRenderer.framework",
+				"${PODS_ROOT}/TruexAdRenderer/TruexAdRenderer-tvOS-v3.9.3/TruexAdRenderer.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InteractiveMediaAds.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleInteractiveMediaAds.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InnovidAdRenderer.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/InnovidAdRenderer.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PusherSwift.framework",
