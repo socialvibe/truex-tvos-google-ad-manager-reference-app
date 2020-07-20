@@ -35,6 +35,7 @@ class PlayerViewController: UIViewController,
     // We keep track of which ad break we're in so we know how far to seek when skipping it.
     private var currentAdBreak: IMAAdPodInfo?
     private var currentTrueXAd: IMAAd?
+    private var timeRangesToSkip: [CMTimeRange] = []
     
     // MARK: [OPTIONAL]
     // Variables used to display a loading screen
@@ -251,8 +252,7 @@ class PlayerViewController: UIViewController,
     
     private func seekAfterTrueXInvalidAndPlay() {
         let currentAdBreakIndex = currentAdBreak?.podIndex ?? 0
-        let normalAdPodStartTime = adCuepoints[currentAdBreakIndex].startTime + (currentTrueXAd?.duration ?? 0)
-        videoDisplay.seekStream(toTime: normalAdPodStartTime)
+        timeRangesToSkip.append(timeRangeFrom(start: adCuepoints[currentAdBreakIndex].startTime, duration: (currentTrueXAd?.duration ?? 0)))
         videoDisplay.play()
     }
     
@@ -283,7 +283,7 @@ class PlayerViewController: UIViewController,
         // Ensure the viewer cannot seek past an unplayed ad
         if let prevCuepoint = prevCuepoint, isInvalidSeekFromAdBreak(prevCuepoint, oldTime: oldTime) {
             self.userSeekTime = targetTimeSeconds
-            return CMTime(seconds: prevCuepoint.startTime, preferredTimescale: 1000)
+            return getFirstVideoAdStartTime(prevCuepoint)
         }
         return targetTime
     }
@@ -294,6 +294,16 @@ class PlayerViewController: UIViewController,
         return !cuePoint.isPlayed ||
                 oldTime.seconds < cuePoint.startTime ||
                 (oldTime.seconds > cuePoint.startTime && oldTime.seconds < cuePoint.endTime);
+    }
+    
+    private func getFirstVideoAdStartTime(_ cuePoint: IMACuepoint) -> CMTime {
+        let adBreakStartTime = CMTime(seconds: cuePoint.startTime, preferredTimescale: 1000)
+        for skippableTruexPlaceholders in timeRangesToSkip {
+            if skippableTruexPlaceholders.containsTime(adBreakStartTime) {
+                return skippableTruexPlaceholders.end
+            }
+        }
+        return adBreakStartTime
     }
     
     func playerViewControllerDidEndDismissalTransition(_ playerViewController: AVPlayerViewController) {
