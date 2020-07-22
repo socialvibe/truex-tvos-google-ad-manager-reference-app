@@ -54,7 +54,7 @@ class PlayerViewController: UIViewController,
     // MARK: [REQUIRED]
     required init?(coder decoder: NSCoder) {
         playerViewController = AVPlayerViewController()
-        player = AVPlayer()
+        player = CustomAVPlayer()
         playerViewController.player = player
         
         videoDisplay = IMAAVPlayerVideoDisplay(avPlayer: playerViewController.player)
@@ -67,6 +67,12 @@ class PlayerViewController: UIViewController,
 
         listenForApplicationEvents()
         /* [OPTIONAL] */ listenForPlayerStatus()
+    }
+    
+    class CustomAVPlayer: AVPlayer {
+        override func seek(to time: CMTime) {
+            return super.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
+        }
     }
     
     private func listenForApplicationEvents() {
@@ -128,6 +134,16 @@ class PlayerViewController: UIViewController,
             
         }
         NSLog("truex: event: %@", event.typeString)
+        
+        // We should skip to the regular ads if the placeholder plays
+        let searchCompanionAds = event.ad?.companionAds.filter{ $0.apiFramework == "truex" }
+        if (searchCompanionAds?.first != nil) {
+            if (event.type == .FIRST_QUARTILE || event.type == .MIDPOINT || event.type == .THIRD_QUARTILE) {
+                seekAfterTrueXInvalidAndPlay()
+                print("Error: truex ad should not be played as normal ads, skipping to regular ads.")
+                return
+            }
+        }
         
         switch event.type {
         case .AD_BREAK_STARTED:
