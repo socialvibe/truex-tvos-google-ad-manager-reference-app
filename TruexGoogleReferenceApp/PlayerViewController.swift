@@ -253,6 +253,8 @@ class PlayerViewController: UIViewController,
     private func seekAfterTrueXInvalidAndPlay() {
         let currentAdBreakIndex = currentAdBreak?.podIndex ?? 0
         timeRangesToSkip.append(timeRangeFrom(start: adCuepoints[currentAdBreakIndex].startTime, duration: (currentTrueXAd?.duration ?? 0)))
+        let normalAdPodStartTime = adCuepoints[currentAdBreakIndex].startTime + (currentTrueXAd?.duration ?? 0)
+        videoDisplay.seekStream(toTime: normalAdPodStartTime)
         videoDisplay.play()
     }
     
