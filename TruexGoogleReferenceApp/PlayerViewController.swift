@@ -50,6 +50,9 @@ class PlayerViewController: UIViewController,
     // To show when the ad breaks are in the player progress bar
     private var adCuepoints: [IMACuepoint] = []
     
+    private var shouldFireAdBreakEnd = false;
+    private var skippingAdBreak = false;
+    
     // MARK: - View Controller Overrides
     // MARK: [REQUIRED]
     required init?(coder decoder: NSCoder) {
@@ -150,8 +153,7 @@ class PlayerViewController: UIViewController,
             allowSeeks(false)
             break;
         case .AD_BREAK_ENDED:
-            allowSeeks(true)
-            /* [OPTIONAL] */ seekToUserTime()
+            adBreakEnded()
             break;
         case .CUEPOINTS_CHANGED:
             adCuepoints.removeAll()
@@ -166,6 +168,8 @@ class PlayerViewController: UIViewController,
             break;
         case .STARTED:
             NSLog("truex: STARTED");
+            shouldFireAdBreakEnd = true;
+            skippingAdBreak = false;
             // [2]
             // The true[X] Engagement information is stored in a VAST companion ad
             // Search the available companions to see if a true[X] companion ad is present
@@ -215,6 +219,18 @@ class PlayerViewController: UIViewController,
             break;
         }
     }
+    
+    func adBreakEnded() {
+        // To ensure we don't double fire
+        if (!shouldFireAdBreakEnd) {
+            return;
+        }
+        shouldFireAdBreakEnd = false;
+        
+        print("AD_BREAK_ENDED logic here")
+        allowSeeks(true)
+        /* [OPTIONAL] */ seekToUserTime()
+    }
 
     // MARK: - true[X] Ad Renderer Delegate Methods
     // MARK: [REQUIRED]
@@ -241,6 +257,7 @@ class PlayerViewController: UIViewController,
             videoDisplay.seekStream(toTime: self.adCuepoints[currentAdBreakIndex].endTime)
         }
         allowSeeks(true)
+        skippingAdBreak = true;
     }
 
     // The next three methods are all invoked when the engagement has, for whatever reason, stopped running. In all of these
@@ -250,6 +267,10 @@ class PlayerViewController: UIViewController,
     // If there the true[X] renderer did not receive an ad, we record the time range of the placeholder ad to skip over it if needed
     func onAdCompleted(_ timeSpent: Int) {
         // [7]
+        if (skippingAdBreak) {
+            skippingAdBreak = false
+            adBreakEnded()
+        }
         adRenderer = nil
         videoDisplay.play()
     }
