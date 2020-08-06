@@ -18,7 +18,7 @@ source 'https://github.com/Innovid/cocoapods-spec.git'
 target 'TruexGoogleReferenceApp' do
     use_frameworks!
     pod 'TruexAdRenderer', '3.9.3'
-    pod 'GoogleAds-IMA-tvOS-SDK', '~> 4.2'
+    pod 'GoogleAds-IMA-tvOS-SDK', '~> 4.3'
 end
 
 post_install do |installer|

@@ -83,7 +83,7 @@ class PlayerViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let adDisplayContainer = IMAAdDisplayContainer(adContainer: self.view)
+        let adDisplayContainer = IMAAdDisplayContainer(adContainer: self.view, viewController: self)
         let streamRequest = IMAVODStreamRequest(contentSourceID: contentSourceID, videoID: videoID, adDisplayContainer: adDisplayContainer, videoDisplay: videoDisplay)
         adsLoader.requestStream(with: streamRequest)
     }
@@ -131,13 +131,16 @@ class PlayerViewController: UIViewController,
         
         switch event.type {
         case .AD_BREAK_STARTED:
+            NSLog("truex: AD_BREAK_STARTED");
             allowSeeks(false)
             break;
         case .AD_BREAK_ENDED:
+            NSLog("truex: AD_BREAK_ENDED");
             allowSeeks(true)
             /* [OPTIONAL] */ seekToUserTime()
             break;
         case .CUEPOINTS_CHANGED:
+            NSLog("truex: CUEPOINTS_CHANGED");
             adCuepoints.removeAll()
             adCuepoints.append(contentsOf: event.adData?["cuepoints"] as! [IMACuepoint])
             showAdTimesInAVPlayer()
