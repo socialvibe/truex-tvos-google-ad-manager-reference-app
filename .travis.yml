@@ -25,8 +25,4 @@ osx_image:
     - xcode12.4
     - xcode12.5
 
-jobs:
-    include:
-        - stage: "Build"
-          name: "Xcode Build"
-          script: ./bin/build_app.sh
+script: ./bin/build_app.sh
