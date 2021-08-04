@@ -6,6 +6,10 @@ cache:
 
 before_install:
     - rm -f Podfile.lock
+    # Travis xcode12 up to xcdode12.4 uses CocoaPods 1.9.3 which has an .xcframework-related bug
+    # In CocoaPods 1.10.1 there are fixes introduced for apps containing .xcframework libraries:
+    # https://github.com/CocoaPods/CocoaPods/releases/tag/1.10.1
+    - if [ $TRAVIS_OSX_IMAGE == "xcode12" ] || [ $TRAVIS_OSX_IMAGE == "xcode12.2" ] || [ $TRAVIS_OSX_IMAGE == "xcode12.3" ] || [ $TRAVIS_OSX_IMAGE == "xcode12.4" ]; then gem install cocoapods -v 1.10.1; fi
     - pod update
 
 osx_image:
