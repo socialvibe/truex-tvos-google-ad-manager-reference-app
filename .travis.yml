@@ -6,39 +6,27 @@ cache:
 
 before_install:
     - rm -f Podfile.lock
+    # Travis xcode12 up to xcdode12.4 uses CocoaPods 1.9.3 which has an .xcframework-related bug
+    # In CocoaPods 1.10.1 there are fixes introduced for apps containing .xcframework libraries:
+    # https://github.com/CocoaPods/CocoaPods/releases/tag/1.10.1
+    - if [ $TRAVIS_OSX_IMAGE == "xcode12" ] || [ $TRAVIS_OSX_IMAGE == "xcode12.2" ] || [ $TRAVIS_OSX_IMAGE == "xcode12.3" ] || [ $TRAVIS_OSX_IMAGE == "xcode12.4" ]; then gem install cocoapods -v 1.10.1; fi
     - pod update
 
-jobs:
-  include:
-    - stage: "Build"
-      name: "Xcode Build (Xcode 10.1)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode10.1
-    - stage: "Build"
-      name: "Xcode Build (Xcode 10.2)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode10.2
-    - stage: "Build"
-      name: "Xcode Build (Xcode 10.3)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode10.3
-    - stage: "Build"
-      name: "Xcode Build (Xcode 11.0)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode11
-    - stage: "Build"
-      name: "Xcode Build (Xcode 11.1)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode11.1
-    - stage: "Build"
-      name: "Xcode Build (Xcode 11.2)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode11.2
-    - stage: "Build"
-      name: "Xcode Build (Xcode 11.3)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode11.3
-    - stage: "Build"
-      name: "Xcode Build (Xcode 11.4)"
-      script: xcodebuild -workspace "TruexGoogleReferenceApp.xcworkspace" -scheme "TruexGoogleReferenceApp" -configuration release -sdk appletvsimulator ENABLE_BITCODE=YES OTHER_CFLAGS="-fembed-bitcode" BITCODE_GENERATION_MODE=bitcode CODE_SIGNING_REQUIRED=NO clean build | xcpretty -f `xcpretty-travis-formatter` && exit ${PIPESTATUS[0]} || exit 1
-      osx_image: xcode11.4
+osx_image:
+    - xcode10.1
+    - xcode10.2
+    - xcode10.3
+    - xcode11
+    - xcode11.1
+    - xcode11.2
+    - xcode11.3
+    - xcode11.4
+    - xcode11.5
+    - xcode11.6
+    - xcode12
+    - xcode12.2
+    - xcode12.3
+    - xcode12.4
+    - xcode12.5
+
+script: ./bin/build_app.sh
