@@ -17,7 +17,7 @@ source 'https://github.com/Innovid/cocoapods-spec.git'
 
 target 'TruexGoogleReferenceApp' do
     use_frameworks!
-    pod 'TruexAdRenderer', '3.9.11'
+    pod 'TruexAdRenderer', '3.9.12'
     pod 'IMA', :path => './IMA'
 end
 

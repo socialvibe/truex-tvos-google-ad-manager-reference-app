@@ -147,10 +147,14 @@ class PlayerViewController: UIViewController,
         player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
         // Slot type constants are defined in TruexConstants.h
         let slotType = currentAdBreak?.adBreakIndex == 0 ? PREROLL : MIDROLL
+        var adParams = jsonDict as! [String: String]
+        // DEBUGGING: uncomment and override the following to variables
+        // adParams["placement_hash"] = "INSERT_YOUR_PLACEMENT_HASH"
+        // adParams["vast_config_url"] = "INSERT_YOUR_AD_TAG";
         
         // [5]
         adRenderer = TruexAdRenderer(url: "https://media.truex.com/placeholder.js",
-                                     adParameters:jsonDict as! [String: String],
+                                     adParameters:adParams,
                                      slotType: slotType)
         adRenderer?.delegate = self
     }
