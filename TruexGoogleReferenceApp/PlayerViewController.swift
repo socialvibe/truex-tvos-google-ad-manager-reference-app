@@ -6,13 +6,12 @@
 //
 
 import AVKit
-import InteractiveMediaAds
+import GoogleInteractiveMediaAds
+
 import TruexAdRenderer
 
-class PlayerViewController: UIViewController,
-                            IMAStreamManagerDelegate,
-                            TruexAdRendererDelegate,
-                            AVPlayerViewControllerDelegate {
+class PlayerViewController: UIViewController, AVPlayerViewControllerDelegate {
+    
     // MARK: [CHANGE ME]
     // Properties needed to initialize a stream with the IMA SDK
     // Values should be set based on your stream
@@ -21,17 +20,17 @@ class PlayerViewController: UIViewController,
     
     // MARK: [REQUIRED]
     // These four properties allow us to do the basic work of playing back ad-stitched video.
-    private var playerViewController: AVPlayerViewController
+    private var playerViewController: AVPlayerViewController!
     private var player: AVPlayer
-    private var videoDisplay: IMAAVPlayerVideoDisplay
-    private var streamManager: IMAStreamManager
-    
+    private var videoDisplay: IMAAVPlayerVideoDisplay!
+    private var adsLoader: IMAAdsLoader!
+    private var adDisplayContainer: IMAAdDisplayContainer!
+    private var adContainerView: UIView!
+
     // The renderer that drives the true[X] Engagement experience.
     private var adRenderer: TruexAdRenderer?
+    private var streamManager: IMAStreamManager!
     
-    // [1]
-    // We keep track of which ad break we're in so we know how far to seek when skipping it.
-    private var currentAdBreak: IMAAdBreakInfo?
     private var currentTrueXAd: IMAAd?
     private var timeRangesToSkip: [CMTimeRange] = []
     
@@ -43,6 +42,8 @@ class PlayerViewController: UIViewController,
     private var playerItemContext = 0
     
     // To save the viewer's seek time if a seek is interrupted by an ad break
+    // We keep track of which ad break we're in so we know how far to seek when skipping it.
+    // [1]
     private var userSeekTime: CMTime?
 
     // To show when the ad breaks are in the player progress bar
@@ -55,12 +56,10 @@ class PlayerViewController: UIViewController,
         player = AVPlayer()
         playerViewController.player = player
         
-        videoDisplay = IMAAVPlayerVideoDisplay(avPlayer: playerViewController.player)
-        streamManager = IMAStreamManager(videoDisplay: videoDisplay)
-
+        videoDisplay = IMAAVPlayerVideoDisplay(avPlayer: playerViewController.player!)
+    
         super.init(coder: decoder)
         
-        streamManager.delegate = self
         playerViewController.delegate = self
 
         listenForApplicationEvents()
@@ -80,16 +79,38 @@ class PlayerViewController: UIViewController,
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupAdsLoader()
+        setupAdContainer()
 
-        let streamRequest = IMAVODStreamRequest(contentSourceID: contentSourceID, videoID: videoID)
-        streamManager.requestStream(streamRequest)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        let streamRequest = IMAVODStreamRequest(contentSourceID: contentSourceID, videoID: videoID, adDisplayContainer: adDisplayContainer, videoDisplay: videoDisplay, userContext: nil)
+
+        self.adsLoader.requestStream(with: streamRequest)
         present(playerViewController, animated: false)
     }
+    
+    func setupAdContainer() {
+        // Attach the ad container to the view hierarchy on top of the player.
+        self.adContainerView = UIView()
+        self.view.addSubview(self.adContainerView)
+        self.adContainerView.frame = self.view.bounds
+        // Keep hidden initially, until an ad break.
+        self.adContainerView.isHidden = true
+        self.adDisplayContainer = IMAAdDisplayContainer(
+            adContainer: self.adContainerView, viewController: self)
+    }
+    
+    func setupAdsLoader() {
+        let settings = IMASettings()
+        settings.enableBackgroundPlayback = true
+        adsLoader = IMAAdsLoader(settings: settings)
+        adsLoader.delegate = self
+      }
     
     // MARK: - UIApplicationDelegate Methods
     // MARK: [REQUIRED]
@@ -101,84 +122,6 @@ class PlayerViewController: UIViewController,
         adRenderer?.resume()
     }
 
-    // MARK: - IMA Stream Manager Delegate Methods
-    // MARK: [REQUIRED]
-    func streamManager(_ streamManager: IMAStreamManager?, adBreakDidStart adBreakInfo: IMAAdBreakInfo?) {
-        // [1]
-        // Keep track of this for later use. adBreakDidStart should fire before adDidStart in all cases.
-        currentAdBreak = adBreakInfo
-        allowSeeks(false)
-    }
-
-    func streamManager(_ streamManager: IMAStreamManager?, adDidStart ad: IMAAd?) {
-        // [2]
-        // The true[X] Engagement information is stored in a VAST companion ad
-        // Search the available companions to see if a true[X] companion ad is present
-        let searchCompanionAds = ad?.companions.filter{ $0.apiFramework == "truex" }
-        guard let companionAd = searchCompanionAds!.first else {
-            print("Unable to find true[X] ad")
-            return
-        }
-        
-        currentTrueXAd = ad
-        // [3]
-        // The companion ad contains a URL (the "static resource URL") which tells us where to go to get the
-        // ad parameters for our Engagement.
-        // Expect a data URL in the following format: "data:application/json;charset=utf-8;base64,<base64 encoded JSON>"
-        // Here we parse the <base 64 encoded JSON> string
-        let base64Config = companionAd.staticResourceURL.components(separatedBy: "base64,")[1]
-        guard let decodedData = Data(base64Encoded:base64Config,
-                                     options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) else {
-            print("Unable to parse static resource url data")
-            return
-        }
-        
-        let jsonDict = try? JSONSerialization.jsonObject(with: decodedData, options: [])
-        if (jsonDict == nil || !(jsonDict is [String: String])) {
-            print("Unable to parse ad parameters JSON")
-            return
-        }
-        
-        // [4]
-        // We pause the underlying stream in order to present the true[X] experience and seek over the current ad,
-        // which is just a placeholder for the true[X] ad.
-        player.pause()
-        let seekTime = player.currentTime() + CMTime(seconds: ad?.duration ?? 0, preferredTimescale: 1000)
-        player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
-        // Slot type constants are defined in TruexConstants.h
-        let slotType = currentAdBreak?.adBreakIndex == 0 ? PREROLL : MIDROLL
-        var adParams = jsonDict as! [String: String]
-        // DEBUGGING: uncomment and override the following to variables
-        // adParams["placement_hash"] = "INSERT_YOUR_PLACEMENT_HASH"
-        // adParams["vast_config_url"] = "INSERT_YOUR_AD_TAG";
-        
-        // [5]
-        adRenderer = TruexAdRenderer(url: "https://media.truex.com/placeholder.js",
-                                     adParameters:adParams,
-                                     slotType: slotType)
-        adRenderer?.delegate = self
-    }
-    
-    // These next two methods are required in the IMAStreamManagerDelegate protocol
-    // but there's nothing we need to do in them for the purposes of this integration demo,
-    // so we leave the bodies empty
-    func streamManager(_ streamManager: IMAStreamManager!, didReceiveError error: Error!) {
-        if let error = error {
-            print("Error: \(error)")
-        }
-    }
-    
-    func streamManager(_ streamManager: IMAStreamManager?, didInitializeStream streamID: String?) {
-        if let streamID = streamID {
-            print("Did initialize stream: \(streamID)")
-        }
-    }
-
-    func streamManager(_ streamManager: IMAStreamManager?, adBreakDidEnd adBreakInfo: IMAAdBreakInfo?) {
-        allowSeeks(true)
-        /* [OPTIONAL] */ seekToUserTime()
-    }
-    
     // MARK: [OPTIONAL]
     func streamManager(_ streamManager: IMAStreamManager!, didUpdate cuepoints: [IMACuepoint]!) {
         adCuepoints.removeAll()
@@ -188,59 +131,11 @@ class PlayerViewController: UIViewController,
     func streamManagerIsReady(forPlayback streamManager: IMAStreamManager!) {
         showAdTimesInAVPlayer()
     }
-
-    // MARK: - true[X] Ad Renderer Delegate Methods
-    // MARK: [REQUIRED]
-    
-    // A real application may use this delegate to implement a timeout
-    // If this delegate is not fired after a set amount of time, the renderer can be stopped with adRenderer?.stop()
-    // Then normal video ads can be shown instead
-    func onAdStarted(_ campaignName: String?) {
-        if let campaignName = campaignName {
-            print("Did start ad: \(campaignName)")
-        }
-    }
-    
-    // [6]
-    // This method is invoked when the viewer has earned their true[ATTENTION] credit. Since in this example their reward
-    // is getting to skip the ads, here we seek over the linear ad pod and into the content. Note that we don't re-enable
-    // playback here; the viewer might stay in their engagements for quite a while after they've earned their credit. However,
-    // by seeking now, we can have the play head at the right place when the viewer is ready.
-    func onAdFreePod() {
-        if let adBreak = currentAdBreak {
-            let seekTime = CMTime(seconds: adBreak.timeOffset + adBreak.duration,
-                                  preferredTimescale: 1000)
-            player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
-        }
-    }
-
-    // The next three methods are all invoked when the engagement has, for whatever reason, stopped running. In all of these
-    // cases, we resume playback of the player. If the viewer has earned their true[ATTENTION] credit, then they will
-    // already be seeked past the ad pod, so they will se content. If not, then the playhead will still be at the beginning
-    // of the ad pod, so on resume, the viewer will see the ads.
-    // If there the true[X] renderer did not receive an ad, we record the time range of the placeholder ad to skip over it if needed
-    func onAdCompleted(_ timeSpent: Int) {
-        // [7]
-        adRenderer = nil
-        player.play()
-    }
-    
-    func onAdError(_ errorMessage: String?) {
-        // [7]
-        adRenderer = nil
-        seekAfterTrueXInvalidAndPlay()
-    }
-    
-    func onNoAdsAvailable() {
-        // [7]
-        adRenderer = nil
-        seekAfterTrueXInvalidAndPlay()
-    }
     
     private func seekAfterTrueXInvalidAndPlay() {
-        if let currentAd = currentTrueXAd, let currentBreak = currentAdBreak {
+        if let currentAd = currentTrueXAd, let userSeekTime = self.userSeekTime {
             // Remember this time range so we can skip over while restricting seeking over ads
-            timeRangesToSkip.append(timeRangeFrom(start: currentBreak.timeOffset, duration: currentAd.duration))
+            timeRangesToSkip.append(timeRangeFrom(start: userSeekTime.seconds, duration: currentAd.duration))
         }
         player.play()
     }
@@ -402,5 +297,155 @@ class PlayerViewController: UIViewController,
         if adCuepoints.count > 0 {
             player.currentItem?.interstitialTimeRanges = interstitialRangesFromCuepoints(adCuepoints)
         }
+    }
+}
+
+extension PlayerViewController: IMAAdsLoaderDelegate {
+    
+    // These next two methods are required in the IMAStreamManagerDelegate protocol
+    // but there's nothing we need to do in them for the purposes of this integration demo,
+    // so we leave the bodies empty
+    func adsLoader(_ loader: IMAAdsLoader, failedWith adErrorData: IMAAdLoadingErrorData) {
+        print("Error: \(adErrorData.adError.message ?? "")")
+        
+        hideLoadingScreen()
+    }
+    
+    
+    func adsLoader(_ loader: IMAAdsLoader, adsLoadedWith adsLoadedData: IMAAdsLoadedData) {
+        self.streamManager = adsLoadedData.streamManager
+        self.streamManager.delegate = self
+        self.streamManager.initialize(with: nil)
+        
+        if let streamID = self.streamManager.streamId {
+            print("Did initialize stream: \(streamID)")
+        }
+    }
+}
+
+// MARK: - IMA Stream Manager Delegate Methods
+extension PlayerViewController: IMAStreamManagerDelegate {
+    
+    func streamManager(_ streamManager: IMAStreamManager, didReceive error: IMAAdError) {
+        print("IMAStreamManagerDelegate ERROR: " + (error.message ?? ""))
+    }
+    
+    func streamManager(_ streamManager: IMAStreamManager, didReceive event: IMAAdEvent) {
+        switch event.type {
+        case .AD_BREAK_STARTED:
+            // [1]
+            // Keep track of this for later use. adBreakStarted should fire before adDidStart in all cases.
+            if let userSeekTime = userSeekTime {
+                self.userSeekTime = userSeekTime + CMTime(seconds: (event.ad?.duration ?? 0), preferredTimescale: 1)
+            }
+            allowSeeks(false)
+            
+        case .AD_BREAK_ENDED:
+            allowSeeks(true)
+            /* [OPTIONAL] */ seekToUserTime()
+            
+        case .STARTED:
+            // [2]
+            // The true[X] Engagement information is stored in a VAST companion ad
+            // Search the available companions to see if a true[X] companion ad is present
+            let searchCompanionAds = event.ad?.companionAds.filter{ $0.apiFramework == "truex" }
+            
+            guard let companionAd = searchCompanionAds!.first else {
+                print("Unable to find true[X] ad")
+                return
+            }
+            currentTrueXAd = event.ad
+            // [3]
+            // The companion ad contains a URL (the "static resource URL") which tells us where to go to get the
+            // ad parameters for our Engagement.
+            // Expect a data URL in the following format: "data:application/json;charset=utf-8;base64,<base64 encoded JSON>"
+            // Here we parse the <base 64 encoded JSON> string
+            
+            let base64Config = (companionAd.resourceValue ?? "").components(separatedBy: "base64,")[1]
+            guard let decodedData = Data(base64Encoded:base64Config,
+                                         options: NSData.Base64DecodingOptions.ignoreUnknownCharacters) else {
+                print("Unable to parse static resource url data")
+                return
+            }
+            
+            let jsonDict = try? JSONSerialization.jsonObject(with: decodedData, options: [])
+            
+            if (jsonDict == nil || !(jsonDict is [String: String])) {
+                print("Unable to parse ad parameters JSON")
+                return
+            }
+            
+            // [4]
+            // We pause the underlying stream in order to present the true[X] experience and seek over the current ad,
+            // which is just a placeholder for the true[X] ad.
+            player.pause()
+            let seekTime = player.currentTime() + CMTime(seconds: event.ad?.duration ?? 0, preferredTimescale: 1000)
+            player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
+            // Slot type constants are defined in TruexConstants.h
+            let slotType = event.ad?.adPodInfo.podIndex == 0 ? PREROLL : MIDROLL
+            let adParams = jsonDict as! [String: String]
+            // DEBUGGING: uncomment and override the following to variables
+            // adParams["placement_hash"] = "INSERT_YOUR_PLACEMENT_HASH"
+            // adParams["vast_config_url"] = "INSERT_YOUR_AD_TAG";
+            
+            // [5]
+            adRenderer = TruexAdRenderer(url: "https://media.truex.com/placeholder.js",
+                                         adParameters:adParams,
+                                         slotType: slotType)
+            adRenderer?.delegate = self
+            
+                        
+        default :
+            print()
+        }
+        
+    }
+}
+
+// MARK: - true[X] Ad Renderer Delegate Methods
+extension PlayerViewController: TruexAdRendererDelegate {
+    // MARK: [REQUIRED]
+    
+    // A real application may use this delegate to implement a timeout
+    // If this delegate is not fired after a set amount of time, the renderer can be stopped with adRenderer?.stop()
+    // Then normal video ads can be shown instead
+    func onAdStarted(_ campaignName: String?) {
+        if let campaignName = campaignName {
+            print("Did start ad: \(campaignName)")
+        }
+    }
+    
+    // [6]
+    // This method is invoked when the viewer has earned their true[ATTENTION] credit. Since in this example their reward
+    // is getting to skip the ads, here we seek over the linear ad pod and into the content. Note that we don't re-enable
+    // playback here; the viewer might stay in their engagements for quite a while after they've earned their credit. However,
+    // by seeking now, we can have the play head at the right place when the viewer is ready.
+    func onAdFreePod() {
+        if let seekTime = userSeekTime {
+            player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
+        }
+    }
+
+    // The next three methods are all invoked when the engagement has, for whatever reason, stopped running. In all of these
+    // cases, we resume playback of the player. If the viewer has earned their true[ATTENTION] credit, then they will
+    // already be seeked past the ad pod, so they will se content. If not, then the playhead will still be at the beginning
+    // of the ad pod, so on resume, the viewer will see the ads.
+    // If there the true[X] renderer did not receive an ad, we record the time range of the placeholder ad to skip over it if needed
+    func onAdCompleted(_ timeSpent: Int) {
+        // [7]
+        adRenderer = nil
+        player.play()
+    }
+    
+    func onAdError(_ errorMessage: String?) {
+        // [7]
+        adRenderer = nil
+        seekAfterTrueXInvalidAndPlay()
+    }
+    
+    func onNoAdsAvailable() {
+        // [7]
+        adRenderer = nil
+        seekAfterTrueXInvalidAndPlay()
     }
 }
